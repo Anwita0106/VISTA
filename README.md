@@ -13,30 +13,9 @@
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)
 ![Tests](https://img.shields.io/badge/functional_tests-43%2F43_passed-2ea44f)
 
-*Software Engineering Lab – BCSE301P, Lab Assessment VI · School of Computer Science Engineering and Information Systems, VIT*
-
 </div>
 
 ---
-
-## 📑 Contents
-
-1. [About the project](#-about-the-project)
-2. [Key features](#-key-features)
-3. [Screenshots](#-screenshots)
-4. [System architecture](#-system-architecture)
-5. [How the main workflows work](#-how-the-main-workflows-work)
-6. [Data model](#-data-model)
-7. [Technology stack](#-technology-stack)
-8. [Project structure](#-project-structure)
-9. [Quick start – run it locally](#-quick-start--run-it-locally)
-10. [Demo accounts](#-demo-accounts)
-11. [Testing](#-testing)
-12. [Deployment](#-deployment)
-13. [Configuration](#-configuration)
-14. [Security](#-security)
-15. [Known limitations](#-known-limitations)
-16. [Team](#-team)
 
 ---
 
@@ -509,8 +488,6 @@ All settings are environment variables. See [`.env.example`](.env.example) for t
 | Anwita Padhi | 24BYB0193 |
 | Taposri Saha | 24BYB0183 |
 
-**Course:** BCSE301P – Software Engineering Lab, Lab Assessment VI
-**Institution:** School of Computer Science Engineering and Information Systems, VIT
 
 ---
 
