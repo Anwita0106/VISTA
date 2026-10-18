@@ -1,0 +1,712 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="VISTA automated tests" timestamp="2026-10-18T16:57:05.111436+00:00">
+  <testsuite name="pytest" tests="61" failures="0" skipped="0" time="5.39">
+    <testcase classname="api" name="tests/test_auth.py::test_ft01_valid_login" time="0.094">
+      <properties>
+        <property name="case" value="FT-01" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft02_invalid_login" time="0.08">
+      <properties>
+        <property name="case" value="FT-02" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft03_role_based_dashboard" time="0.312">
+      <properties>
+        <property name="case" value="FT-03" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft04_student_blocked_from_admin" time="0.017">
+      <properties>
+        <property name="case" value="FT-04" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft05_student_registration" time="0.164">
+      <properties>
+        <property name="case" value="FT-05" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft06_registration_validation[reg_no-ABC123]" time="0.003">
+      <properties>
+        <property name="case" value="FT-06" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft06_registration_validation[phone-12345]" time="0.002">
+      <properties>
+        <property name="case" value="FT-06" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft06_registration_validation[password-short]" time="0.002">
+      <properties>
+        <property name="case" value="FT-06" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft06_registration_validation[email-not-an-email]" time="0.002">
+      <properties>
+        <property name="case" value="FT-06" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft06_registration_validation[full_name-&lt;script&gt;]" time="0.002">
+      <properties>
+        <property name="case" value="FT-06" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft07_profile_update_persists" time="0.107">
+      <properties>
+        <property name="case" value="FT-07" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft31_unauthorized_admin_actions" time="0.165">
+      <properties>
+        <property name="case" value="FT-31" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_auth.py::test_ft41_logout_revokes_token" time="0.167">
+      <properties>
+        <property name="case" value="FT-41" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft30_notice_publish_and_display" time="0.276">
+      <properties>
+        <property name="case" value="FT-30" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft33_lost_and_found" time="0.116">
+      <properties>
+        <property name="case" value="FT-33" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft34_marketplace" time="0.125">
+      <properties>
+        <property name="case" value="FT-34" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft35_notes_and_vault" time="0.07">
+      <properties>
+        <property name="case" value="FT-35" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft36_mess_feedback" time="0.195">
+      <properties>
+        <property name="case" value="FT-36" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft37_roommate_finder" time="0.083">
+      <properties>
+        <property name="case" value="FT-37" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft38_room_allocation_rules" time="0.154">
+      <properties>
+        <property name="case" value="FT-38" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft39_reports_match_database" time="0.086">
+      <properties>
+        <property name="case" value="FT-39" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft40_in_app_messaging" time="0.04">
+      <properties>
+        <property name="case" value="FT-40" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft42_admin_registers_staff_warden_admin" time="0.497">
+      <properties>
+        <property name="case" value="FT-42" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_community_admin.py::test_ft43_hostel_map_and_structure" time="0.066">
+      <properties>
+        <property name="case" value="FT-43" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_complaints.py::test_ft08_register_complaint_forwarded" time="0.027">
+      <properties>
+        <property name="case" value="FT-08" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_complaints.py::test_ft09_complaint_missing_fields" time="0.014">
+      <properties>
+        <property name="case" value="FT-09" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_complaints.py::test_ft10_washroom_water_high_priority" time="0.033">
+      <properties>
+        <property name="case" value="FT-10" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_complaints.py::test_ft11_staff_updates_status" time="0.051">
+      <properties>
+        <property name="case" value="FT-11" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_complaints.py::test_ft12_invalid_complaint_transitions" time="0.057">
+      <properties>
+        <property name="case" value="FT-12" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_complaints.py::test_ft13_escalation_rule" time="0.13">
+      <properties>
+        <property name="case" value="FT-13" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_delivery.py::test_ft22_create_delivery_request" time="0.038">
+      <properties>
+        <property name="case" value="FT-22" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_delivery.py::test_ft23_carrier_acceptance" time="0.058">
+      <properties>
+        <property name="case" value="FT-23" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_delivery.py::test_ft24_valid_otp_completes_delivery" time="0.095">
+      <properties>
+        <property name="case" value="FT-24" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_delivery.py::test_ft25_invalid_otp" time="0.082">
+      <properties>
+        <property name="case" value="FT-25" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_delivery.py::test_ft26_otp_lockout_and_expiry" time="0.232">
+      <properties>
+        <property name="case" value="FT-26" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_delivery.py::test_ft27_invalid_delivery_transitions" time="0.053">
+      <properties>
+        <property name="case" value="FT-27" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_delivery.py::test_ft28_qr_photo_verification" time="0.111">
+      <properties>
+        <property name="case" value="FT-28" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_delivery.py::test_ft29_gate_parcel_reservation" time="0.074">
+      <properties>
+        <property name="case" value="FT-29" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft07_authentication_enforced" time="0.0">
+      <properties>
+        <property name="case" value="NFT-07" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft08_role_permission_matrix" time="0.067">
+      <properties>
+        <property name="case" value="NFT-08" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft09_sql_injection" time="0.122">
+      <properties>
+        <property name="case" value="NFT-09" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft11_token_handling" time="0.088">
+      <properties>
+        <property name="case" value="NFT-11" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft12_sensitive_data_protection" time="0.217">
+      <properties>
+        <property name="case" value="NFT-12" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft13_brute_force_lockout" time="0.383">
+      <properties>
+        <property name="case" value="NFT-13" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft14_upload_validation" time="0.018">
+      <properties>
+        <property name="case" value="NFT-14" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft20_error_handling" time="0.014">
+      <properties>
+        <property name="case" value="NFT-20" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft21_duplicate_and_race_conditions" time="0.086">
+      <properties>
+        <property name="case" value="NFT-21" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_nonfunctional_security.py::test_nft23_audit_and_status_consistency" time="0.082">
+      <properties>
+        <property name="case" value="NFT-23" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft14_visitor_registration" time="0.019">
+      <properties>
+        <property name="case" value="FT-14" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft15_warden_approves" time="0.032">
+      <properties>
+        <property name="case" value="FT-15" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft16_warden_rejects" time="0.098">
+      <properties>
+        <property name="case" value="FT-16" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[past date-data0-422]" time="0.004">
+      <properties>
+        <property name="case" value="FT-17" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[more than 30 days ahead-data1-422]" time="0.004">
+      <properties>
+        <property name="case" value="FT-17" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[malformed date-data2-422]" time="0.004">
+      <properties>
+        <property name="case" value="FT-17" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[end before start-data3-422]" time="0.004">
+      <properties>
+        <property name="case" value="FT-17" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[outside visiting hours-data4-422]" time="0.004">
+      <properties>
+        <property name="case" value="FT-17" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[missing phone-data5-422]" time="0.005">
+      <properties>
+        <property name="case" value="FT-17" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft18_sick_meal_request" time="0.153">
+      <properties>
+        <property name="case" value="FT-18" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft19_room_cleaning_request" time="0.036">
+      <properties>
+        <property name="case" value="FT-19" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft20_sos_raise_ack_resolve" time="0.054">
+      <properties>
+        <property name="case" value="FT-20" />
+      </properties>
+    </testcase>
+    <testcase classname="api" name="tests/test_visitors_services_sos.py::test_ft21_sos_requires_confirmation_and_role" time="0.015">
+      <properties>
+        <property name="case" value="FT-21" />
+      </properties>
+    </testcase>
+  </testsuite>
+  <testsuite name="vitest" tests="14" failures="0" skipped="0" time="0.32">
+    <testcase classname="jsdom" name="ui.test.tsx &gt; UI components renders a status badge with a readable label" time="0.025" />
+    <testcase classname="jsdom" name="ui.test.tsx &gt; UI components links a field error to its input for screen readers" time="0.01" />
+    <testcase classname="jsdom" name="ui.test.tsx &gt; UI components closes a modal with the Escape key" time="0.02" />
+    <testcase classname="jsdom" name="ui.test.tsx &gt; Login page shows validation errors without calling the API" time="0.111" />
+    <testcase classname="jsdom" name="ui.test.tsx &gt; Login page shows the server error for invalid credentials" time="0.149" />
+    <testcase classname="jsdom" name="validation.test.ts &gt; registration validation accepts a valid form" time="0.002" />
+    <testcase classname="jsdom" name="validation.test.ts &gt; registration validation rejects a bad registration number" time="0.0" />
+    <testcase classname="jsdom" name="validation.test.ts &gt; registration validation rejects a mismatched confirmation" time="0.0" />
+    <testcase classname="jsdom" name="validation.test.ts &gt; registration validation rejects an invalid phone" time="0.0" />
+    <testcase classname="jsdom" name="validation.test.ts &gt; registration validation requires letters and digits in passwords" time="0.0" />
+    <testcase classname="jsdom" name="validation.test.ts &gt; visitor validation accepts a valid visitor" time="0.0" />
+    <testcase classname="jsdom" name="validation.test.ts &gt; visitor validation rejects a past date" time="0.0" />
+    <testcase classname="jsdom" name="validation.test.ts &gt; visitor validation rejects an inverted time window" time="0.0" />
+    <testcase classname="jsdom" name="validation.test.ts &gt; complaint validation requires category, title and description" time="0.001" />
+  </testsuite>
+  <testsuite name="playwright" tests="25" failures="0" skipped="2" time="54.87">
+    <testcase classname="chromium-desktop" name="[chromium-desktop] delivery.spec.ts › FT-22/FT-23/FT-24 P2P delivery end to end with OTP handover" time="3.59">
+      <properties>
+        <property name="case" value="FT-22" />
+        <property name="case" value="FT-23" />
+        <property name="case" value="FT-24" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-01 valid student login opens the student dashboard" time="0.7">
+      <properties>
+        <property name="case" value="FT-01" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-02 invalid password shows an error and stays on login" time="0.66">
+      <properties>
+        <property name="case" value="FT-02" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-03 navigation is role-specific" time="1.22">
+      <properties>
+        <property name="case" value="FT-03" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-04 student opening an admin page gets access denied" time="0.66">
+      <properties>
+        <property name="case" value="FT-04" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-06 registration form shows field validation errors" time="0.56">
+      <properties>
+        <property name="case" value="FT-06" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-41 logout ends the session" time="1.01">
+      <properties>
+        <property name="case" value="FT-41" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-07 profile update persists after reload" time="0.99">
+      <properties>
+        <property name="case" value="FT-07" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-08/FT-32 complaint is created in the UI and persists after reload" time="1.43">
+      <properties>
+        <property name="case" value="FT-08" />
+        <property name="case" value="FT-32" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-09 complaint form blocks missing required fields" time="0.83">
+      <properties>
+        <property name="case" value="FT-09" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-14/FT-15 student registers a visitor, warden approves, student sees approval" time="1.98">
+      <properties>
+        <property name="case" value="FT-14" />
+        <property name="case" value="FT-15" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-17 past visit date is rejected in the form" time="0.94">
+      <properties>
+        <property name="case" value="FT-17" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-30 warden publishes a notice and students see it" time="2.35">
+      <properties>
+        <property name="case" value="FT-30" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] functional.spec.ts › FT-20 SOS requires confirmation, reaches the warden, is acknowledged and resolved" time="2.16">
+      <properties>
+        <property name="case" value="FT-20" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] nonfunctional.spec.ts › NFT-03 page load time of key pages is under 3 seconds" time="2.43">
+      <properties>
+        <property name="case" value="NFT-03" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] nonfunctional.spec.ts › NFT-10 stored XSS payloads are rendered as text, not executed" time="2.09">
+      <properties>
+        <property name="case" value="NFT-10" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] nonfunctional.spec.ts › NFT-15 automated accessibility scan (axe-core, WCAG 2.1 A/AA)" time="9.09">
+      <properties>
+        <property name="case" value="NFT-15" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] nonfunctional.spec.ts › NFT-16 keyboard-only navigation for login and complaint form" time="1.14">
+      <properties>
+        <property name="case" value="NFT-16" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] nonfunctional.spec.ts › NFT-17 form errors are announced and linked to their fields" time="0.5">
+      <properties>
+        <property name="case" value="NFT-17" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] nonfunctional.spec.ts › NFT-18 responsive layout has no horizontal scrolling" time="17.42">
+      <properties>
+        <property name="case" value="NFT-18" />
+      </properties>
+    </testcase>
+    <testcase classname="chromium-desktop" name="[chromium-desktop] smoke.spec.ts › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list" time="1.0">
+      <properties>
+        <property name="case" value="NFT-26" />
+      </properties>
+    </testcase>
+    <testcase classname="firefox-desktop" name="[firefox-desktop] smoke.spec.ts › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list" time="0.0">
+      <skipped message="Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox" />
+      <properties>
+        <property name="case" value="NFT-27" />
+      </properties>
+    </testcase>
+    <testcase classname="webkit-desktop" name="[webkit-desktop] smoke.spec.ts › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list" time="0.0">
+      <skipped message="Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/webkit-2215/pw_run.sh" />
+      <properties>
+        <property name="case" value="NFT-28" />
+      </properties>
+    </testcase>
+    <testcase classname="mobile-pixel5" name="[mobile-pixel5] mobile.spec.ts › NFT-29 mobile viewport: login, menu, SOS button and complaint form work" time="1.02">
+      <properties>
+        <property name="case" value="NFT-29" />
+      </properties>
+    </testcase>
+    <testcase classname="mobile-iphone12-chromium" name="[mobile-iphone12-chromium] mobile.spec.ts › NFT-29 mobile viewport: login, menu, SOS button and complaint form work" time="1.1">
+      <properties>
+        <property name="case" value="NFT-29" />
+      </properties>
+    </testcase>
+  </testsuite>
+  <testsuite name="functional-cases" tests="43" failures="0" skipped="0">
+    <testcase classname="functional-cases" name="FT-01 Login with valid student credentials">
+      <system-out>API: HTTP 200; JWT issued; role=STUDENT; room=G-101
+UI: redirected to dashboard 'Good evening, Priya', role label 'Student', SOS button visible</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-02 Login with an invalid password">
+      <system-out>API: HTTP 401 'Invalid email or password' for wrong password and for unknown email (same message)
+UI: error 'Invalid email or password' displayed; URL stays /login</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-03 Role-based dashboard and menu">
+      <system-out>API: Student dashboard cards=['active_deliveries', 'active_services', 'open_complaints', 'pending_visitors']; warden dashboard has 8 management cards incl. active_sos
+UI: student menu shows Document Vault, no Users; warden menu shows Users/Hostels, no Vault; warden dashboard shows Active SOS card</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-04 Student attempts administrator operations">
+      <system-out>API: Student received 403 Forbidden on POST /api/admin/users, GET /api/admin/audit-logs, PATCH /api/visitors/1/decision, POST /api/notices
+UI: /admin/users as student shows '403 Access denied' page</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-05 Student self-registration with valid data">
+      <system-out>API: 201 Created (role STUDENT); duplicate reg no -&gt; 409 'An account with this registration number already exists'; new account can log in</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-06 Registration input validation">
+      <system-out>API: reg_no='ABC123' -&gt; 422 'reg_no: Registration number must look like 24BYB0193'; phone='12345' -&gt; 422 'phone: Phone must be a valid 10-digit Indian mobile number'; password='short' -&gt; 422 'password: Password must be at least 8 characters and contain letters a'; email='not-an-email' -&gt; 422 'email: value is not a valid email address: An email address must have '; full_name='&lt;script&gt;' -&gt; 422 'full_name: Name may contain only letters, spaces, dots, hyphens and ap'
+UI: inline errors for reg. no., mobile, password and name; form not submitted</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-07 Update profile and roommate preferences">
+      <system-out>API: Profile saved and re-read: phone=9000011111, pref_sleep=LATE; invalid phone -&gt; 422
+UI: 'Profile updated' toast; after reload mobile=9988776655, study=QUIET</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-08 Register an electrical/plumbing complaint">
+      <system-out>API: 201; CMP-00008 OPEN, priority MEDIUM; auto-forwarded to Ramesh Electricals (MAINTENANCE) and notified
+UI: CMP-00008 created (status Open, forwarded to maintenance staff) and still listed after page reload</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-09 Complaint with missing required fields">
+      <system-out>API: Empty title/description -&gt; 422 'title: String should have at least 5 characters'; missing category -&gt; 422; invalid category -&gt; 422
+UI: three inline errors shown (category, title, description); dialog stays open, nothing submitted</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-10 Washroom and water complaints get HIGH priority">
+      <system-out>API: WASHROOM requested LOW -&gt; stored HIGH; WATER requested MEDIUM -&gt; stored HIGH</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-11 Staff updates complaint status to resolved">
+      <system-out>API: OPEN -&gt; IN_PROGRESS -&gt; RESOLVED by assigned staff, CLOSED by student; history has 4 entries; student notified</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-12 Invalid complaint status changes are blocked">
+      <system-out>API: Staff CLOSE -&gt; 403; student RESOLVE -&gt; 403; other student view -&gt; 404; CLOSED -&gt; IN_PROGRESS -&gt; 409 'Invalid status change from CLOSED to IN_PROGRESS'</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-13 Escalation of unresolved complaint to chief warden">
+      <system-out>API: HIGH complaint aged 25 h escalated to Dr. Lakshmi Narayanan; 0-h LOW complaint not escalated; chief warden notified</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-14 Student registers a visitor">
+      <system-out>API: 201 PENDING; 12 warden notifications; duplicate same visitor/date -&gt; 409
+UI: request shown Pending to student → warden approved with remark → student list shows Approved + 'Please carry ID'</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-15 Warden approves a visitor request">
+      <system-out>API: Warden approval -&gt; 200 APPROVED; student sees APPROVED and gets notification; deciding again -&gt; 409
+UI: request shown Pending to student → warden approved with remark → student list shows Approved + 'Please carry ID'</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-16 Warden rejects a visitor request">
+      <system-out>API: Reject without reason -&gt; 422 'Please give a reason when rejecting a visitor request'; with reason -&gt; REJECTED, remark shown to student</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-17 Invalid visitor date and time">
+      <system-out>API: past date -&gt; 422 'Visit date cannot be in the past'; more than 30 days ahead -&gt; 422 'Visits can be requested at most 30 days in advance'; malformed date -&gt; 422 'Visit date must be a valid date (YYYY-MM-DD)'; end before start -&gt; 422 'Visit end time must be after the start time'; outside visiting hours -&gt; 422 'Visiting hours are 08:00 to 20:00'; missing phone -&gt; 422 'visitor_phone: Phone must be a valid 10-digit Indian mobile '
+UI: 'Visit date cannot be in the past' shown; no request created</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-18 Sick-meal request and fulfilment">
+      <system-out>API: Sick meal 201 PENDING -&gt; in mess queue -&gt; ACCEPTED -&gt; COMPLETED by mess staff; cleaning staff -&gt; 403</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-19 Room-cleaning request">
+      <system-out>API: Cleaning 201 PENDING visible to cleaning staff; duplicate -&gt; 409; missing slot -&gt; 422; date &gt; 7 days -&gt; 422</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-20 Raise, acknowledge and resolve an SOS">
+      <system-out>API: SOS RAISED, 6 responders (warden, chief, security) notified in 2.2 ms (API round trip 15 ms); resolve-before-ack -&gt; 409; ACKNOWLEDGED -&gt; RESOLVED with timestamps
+UI: confirmation dialog with demo disclaimer → alert Raised on warden board → Acknowledged → Resolved; student sees Resolved</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-21 SOS without confirmation / by unauthorised role">
+      <system-out>API: Unconfirmed SOS -&gt; 400 'SOS must be confirmed before it is sent', no alert stored; maintenance staff cannot acknowledge (403)</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-22 Create an inter-hostel delivery request (₹10)">
+      <system-out>API: 201 DLV-00002 OPEN, fee ₹10, demo receipt RCPT-DEMO-000002, Men's Hostel North -&gt; Ladies Hostel East; same-hostel receiver -&gt; 400; fee not confirmed -&gt; 400; unknown receiver -&gt; 404
+UI: DLV-00002 posted with ₹10 demo fee → accepted &amp; picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-23 Carrier accepts a delivery">
+      <system-out>API: Listed as available; sender/receiver accept -&gt; 400; Vikram accepts -&gt; ACCEPTED; second carrier -&gt; 409 'This delivery has already been taken by another carrier'
+UI: DLV-00002 posted with ₹10 demo fee → accepted &amp; picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-24 Handover with valid OTP">
+      <system-out>API: OTP visible only to receiver (hidden from carrier); carrier entered it -&gt; 200 DELIVERED; OTP cleared after use
+UI: DLV-00002 posted with ₹10 demo fee → accepted &amp; picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-25 Handover with invalid OTP">
+      <system-out>API: Wrong OTP -&gt; 400 'Incorrect OTP. 2 attempt(s) left.'; non-numeric -&gt; 422; sender entering OTP -&gt; 403; status stays PICKED_UP</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-26 OTP lock after 3 attempts and expiry">
+      <system-out>API: 3 wrong OTPs -&gt; 400, 400, 423 (locked); correct OTP after lock -&gt; 410; expired OTP -&gt; 410 'OTP has expired or is not active. Ask for a new OTP.'; OTP re-issue capped at 3 (4th -&gt; 409)</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-27 Invalid delivery state transitions">
+      <system-out>API: Non-carrier verify/pickup -&gt; 403; cancel after ACCEPTED -&gt; 409 'Invalid delivery state change from ACCEPTED to CANCELLED'; fail before pickup -&gt; 409</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-28 Handover with QR code + photo + receiver details">
+      <system-out>API: Wrong room -&gt; 400 'Verification failed: room number did not match'; forged QR -&gt; 400; fake image -&gt; 415; correct QR + photo + details -&gt; DELIVERED with photo stored</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-29 Parcel reservation with courier name and gate OTP">
+      <system-out>API: Missing courier name -&gt; 422; GATE-00001 BOOKED with courier 'Ravi Kumar'; collect before arrival -&gt; 409; security marks AT_GATE; wrong OTP -&gt; 400; maintenance staff -&gt; 403; correct OTP -&gt; COLLECTED</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-30 Warden publishes a notice">
+      <system-out>API: Warden published URGENT notice to Ladies Hostel East; shown to Priya, hidden from Men's hostel student; 15 students notified; empty notice -&gt; 422
+UI: notice published by warden; visible on student's notice board and in student's notifications</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-31 Unauthorised administrative actions by staff/wardens">
+      <system-out>API: 403 for: warden deactivates user; warden creates hostel; security approves visitor; maintenance views audit log</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-32 Data persists after page reload">
+      <system-out>UI: CMP-00008 created (status Open, forwarded to maintenance staff) and still listed after page reload</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-33 Report and search lost &amp; found items">
+      <system-out>API: Lost item reported (201) and found by keyword search; future date -&gt; 422; only reporter can close (others 403)</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-34 Marketplace listing and sale">
+      <system-out>API: Listing 201; negative price -&gt; 422; non-seller mark sold -&gt; 403; sold item hidden from listings; price sort ascending verified</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-35 Notes sharing and private document vault">
+      <system-out>API: Note with PDF shared and readable by classmates; vault file downloadable by owner, other student -&gt; 404; .exe -&gt; 415; &gt;2 MB -&gt; 413</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-36 Mess feedback">
+      <system-out>API: Feedback 201; same meal twice -&gt; 409; rating 7 -&gt; 422; mess staff summary shows BREAKFAST avg 3.0</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-37 Roommate finder">
+      <system-out>API: 9 same-gender matches ranked by preference score (top Sneha Das 3/3); 46 rooms with free beds listed</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-38 Room allocation rules">
+      <system-out>API: Female student -&gt; boys' hostel 400; -&gt; G-104 200; full room -&gt; 409; student allocating -&gt; 403; duplicate room number -&gt; 409</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-39 Admin reports match stored data and export CSV">
+      <system-out>API: Report complaint total 7 = DB count; students 57 = DB count; CSV export has 7 rows + header; warden -&gt; 403</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-40 In-app messaging between student and warden">
+      <system-out>API: Student -&gt; warden message delivered (unread=1), shown in thread, marked read on open (unread=0); empty message -&gt; 422</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-41 Logout invalidates the session">
+      <system-out>API: Logout 200; reusing the same token -&gt; 401 'Session has been logged out'
+UI: logout returns to /login; opening /complaints afterwards redirects to /login</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-42 Administrator registers warden, staff and admin accounts">
+      <system-out>API: Admin created WARDEN, STAFF (SECURITY) and ADMIN accounts (201) and each could log in; staff without type -&gt; 422; duplicate email -&gt; 409</system-out>
+    </testcase>
+    <testcase classname="functional-cases" name="FT-43 Hostel map and hostel structure">
+      <system-out>API: Map returns 12 locations (BLOCK, GATE, MESS, SERVICE); 4 hostels with blocks and live occupancy; unauthenticated -&gt; 401</system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="nonfunctional-cases" tests="34" failures="2" skipped="4">
+    <testcase classname="nonfunctional-cases" name="NFT-01 API response time under normal load">
+      <system-out>50 users, 9,966 requests, 129.33 req/s, failed 0.00 %, avg 54 ms, p95 92 ms, max 261 ms</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-02 300 concurrent users (peak hostel hours)">
+      <system-out>300 users, 12,713 requests, 162.14 req/s, failed 0.00 %, avg 1363 ms, p95 1921 ms, max 3021 ms (after fix of DEF-03; first run: 0.82 % failed, p99 32 s)</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-03 Page load time of key pages">
+      <system-out>UI: Avg time until content visible (3 loads each, local server): / 175 ms, /complaints 143 ms, /notices 133 ms, /delivery 146 ms; worst 175 ms</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-04 SOS reaches wardens/security quickly under load">
+      <system-out>20 SOS alerts raised during a 150 virtual users (k6) load: server-side notify delay max 114.5 ms; alert visible on warden board avg 1295.0 ms, p95 1942.1 ms, max 2065.1 ms</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-05 Dashboard and database query time with large data">
+      <system-out>With +20,000 complaints, +5,000 deliveries, +20,000 notifications: warden dashboard avg 34.1 ms; admin reports avg 93.6 ms; complaint search avg 65.6 ms; complaint page 500 avg 62.8 ms; student notifications avg 13.6 ms; all deliveries avg 345.3 ms. Slowest average 345.3 ms</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-06 Performance degradation as load increases">
+      <failure message="p95: 92 ms (50 users) → 781 ms (150) → 1921 ms (300) = 20.8x; throughput 129.33 → 167.1 → 162.14 req/s. CPU-bound on a 2-vCPU host shared with PostgreSQL and the load generator" />
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-07 Authentication required on every protected endpoint">
+      <system-out>API: 0 protected endpoint/method pairs called without a token: all returned 401</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-08 Role-based authorisation matrix">
+      <system-out>API: 16 cross-role operations (student, staff, warden, admin) all denied with 403 by the backend</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-09 SQL injection resistance">
+      <system-out>API: 5 injection payloads x 4 inputs (20 requests): login always 401, searches 200 with no extra rows, 0 server errors, users table intact</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-10 Cross-site scripting (stored XSS)">
+      <system-out>UI: Payloads shown literally to student and warden; JavaScript dialogs triggered: 0; injected &lt;img&gt; elements: 0; CSP header: present (script-src 'self')</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-11 Session / token handling">
+      <system-out>API: Tampered, expired, wrong-key and alg=none tokens all 401; tokens expire after 120 min; logout revocation covered in FT-41</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-12 Protection of sensitive information">
+      <system-out>API: No password/OTP hashes in any API response; 69 passwords bcrypt-hashed; 7 OTPs stored as bcrypt hashes; OTP/QR secret shown only to the receiver (FT-24)</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-13 Brute-force protection">
+      <system-out>API: 5 wrong passwords -&gt; 401 each; 6th attempt -&gt; 429; correct password while locked -&gt; 429 'Too many failed attempts. Try again in 15 minutes.'</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-14 File upload validation">
+      <system-out>API: Uploads rejected: exe as octet-stream -&gt; 415; html renamed pdf -&gt; 415; empty file -&gt; 422; svg image -&gt; 415; size limit 2 MB -&gt; 413 (FT-35)</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-15 Automated WCAG 2.1 A/AA scan">
+      <system-out>UI: 7 pages scanned. /login: 0 serious/critical rule(s); /: 0 serious/critical rule(s); /complaints: 0 serious/critical rule(s); /visitors: 0 serious/critical rule(s); /delivery: 0 serious/critical rule(s); /sos: 0 serious/critical rule(s); /profile: 0 serious/critical rule(s). Total serious/critical nodes: 0</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-16 Keyboard-only navigation">
+      <system-out>UI: Login completed with Tab/typing/Enter only; complaint dialog opened with Enter, focus moved into the form, Escape closed it; 'Skip to content' link is first in tab order</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-17 Form validation feedback">
+      <system-out>UI: Empty registration submit: 6 inline errors with role=alert; inputs marked aria-invalid and linked via aria-describedby</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-18 Responsive layout">
+      <system-out>UI: 8 pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: none</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-19 New user completes key tasks within 15 minutes">
+      <skipped message="Not Run: Not executed: Needs a moderated session with real first-time users; automated scripts cannot measure human learning time." />
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-20 Error handling">
+      <system-out>API: missing record -&gt; 404; malformed JSON -&gt; 422; bad query type -&gt; 422; unknown route -&gt; 404; wrong method -&gt; 405; JSON error bodies, no stack traces; /api/health reports DB status</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-21 Duplicate submissions and race conditions">
+      <system-out>API: 5 parallel identical complaint submissions -&gt; codes [201, 409, 409, 409, 409], 1 stored; 4 parallel carrier accepts -&gt; codes [200, 409, 409, 409], carrier recorded once</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-22 Persistence after server restart">
+      <system-out>Complaint CMP-00258 created, API server stopped and restarted, record read back with HTTP 200 and identical data</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-23 Audit trail and status consistency">
+      <system-out>API: Complaint statuses ['CLOSED', 'ESCALATED', 'IN_PROGRESS', 'OPEN', 'RESOLVED'] all valid with matching timestamps; all 10 critical actions present in the audit log with user ID and timestamp</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-24 Backup and restore">
+      <system-out>pg_dump 0.8 MB in 0.2 s; restore into a new database in 0.4 s (target &lt; 2 h); row counts of 8 tables identical (e.g. complaints 20,258). Daily scheduling is a deployment task (scripts/backup_db.sh + cron) and was not run here</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-25 Error rate across all load tests">
+      <system-out>0 failed of 35,598 requests across 3 load runs = 0.000 %</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-26 Chromium desktop browser">
+      <system-out>Chromium 141.0.7390.37: 21/21 desktop E2E tests passed</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-27 Firefox desktop browser">
+      <skipped message="Blocked: Not executed – firefox-desktop: Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox" />
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-28 Safari / WebKit browser">
+      <skipped message="Blocked: Not executed – webkit-desktop: Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/webkit-2215/pw_run.sh" />
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-29 Mobile viewports">
+      <system-out>UI: mobile-pixel5 (393x727, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow
+UI: mobile-iphone12-chromium (390x664, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-30 Linting and type checking">
+      <system-out>ESLint: 0 errors, 0 warnings in 46 files; TypeScript strict: 0 errors; Ruff (Python): 0 issues</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-31 Production build">
+      <system-out>Production build succeeded in 8.5 s; JavaScript bundle 341 KB (uncompressed)</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-32 Reproducible setup from scratch">
+      <system-out>Empty database initialised and seeded in 1.6 s (26 tables, 65 users); API health OK on the fresh DB; .env.example covers 15/15 variables read by the code</system-out>
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-33 Monthly uptime">
+      <skipped message="Not Run: Not executed: Needs a public deployment monitored for 30 days; the app exposes /api/health for an uptime monitor." />
+    </testcase>
+    <testcase classname="nonfunctional-cases" name="NFT-34 Personal data encrypted in transit and at rest">
+      <failure message="Passwords and OTPs are hashed, but student phone numbers, registration numbers and visitor phone numbers are stored as plain text (e.g. phone '984*******'); local PostgreSQL ssl=off. Encryption in transit relies on HTTPS at the hosting provider (HSTS header is sent in production) and could not be verified locally. NFR06 (encrypted at rest) is NOT met by the application" />
+    </testcase>
+  </testsuite>
+</testsuites>

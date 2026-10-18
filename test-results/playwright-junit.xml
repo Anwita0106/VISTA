@@ -1,0 +1,268 @@
+<testsuites id="" name="" tests="25" failures="2" skipped="0" errors="0" time="62.536661">
+<testsuite name="delivery.spec.ts" timestamp="2026-10-18T16:55:52.064Z" hostname="chromium-desktop" tests="1" failures="0" skipped="0" time="3.587" errors="0">
+<testcase name="FT-22/FT-23/FT-24 P2P delivery end to end with OTP handover" classname="delivery.spec.ts" time="3.587">
+<properties>
+<property name="case" value="FT-22">
+</property>
+<property name="case" value="FT-23">
+</property>
+<property name="case" value="FT-24">
+</property>
+<property name="actual" value="UI: DLV-00002 posted with ₹10 demo fee → accepted &amp; picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed &apos;2 attempt(s) left&apos; → correct OTP → Delivered (also on sender&apos;s view)">
+</property>
+</properties>
+</testcase>
+</testsuite>
+<testsuite name="functional.spec.ts" timestamp="2026-10-18T16:55:52.064Z" hostname="chromium-desktop" tests="13" failures="0" skipped="0" time="15.492" errors="0">
+<testcase name="Authentication &amp; access › FT-01 valid student login opens the student dashboard" classname="functional.spec.ts" time="0.704">
+<properties>
+<property name="case" value="FT-01">
+</property>
+<property name="actual" value="UI: redirected to dashboard &apos;Good evening, Priya&apos;, role label &apos;Student&apos;, SOS button visible">
+</property>
+</properties>
+</testcase>
+<testcase name="Authentication &amp; access › FT-02 invalid password shows an error and stays on login" classname="functional.spec.ts" time="0.664">
+<properties>
+<property name="case" value="FT-02">
+</property>
+<property name="actual" value="UI: error &apos;Invalid email or password&apos; displayed; URL stays /login">
+</property>
+</properties>
+</testcase>
+<testcase name="Authentication &amp; access › FT-03 navigation is role-specific" classname="functional.spec.ts" time="1.221">
+<properties>
+<property name="case" value="FT-03">
+</property>
+<property name="actual" value="UI: student menu shows Document Vault, no Users; warden menu shows Users/Hostels, no Vault; warden dashboard shows Active SOS card">
+</property>
+</properties>
+</testcase>
+<testcase name="Authentication &amp; access › FT-04 student opening an admin page gets access denied" classname="functional.spec.ts" time="0.658">
+<properties>
+<property name="case" value="FT-04">
+</property>
+<property name="actual" value="UI: /admin/users as student shows &apos;403 Access denied&apos; page">
+</property>
+</properties>
+</testcase>
+<testcase name="Authentication &amp; access › FT-06 registration form shows field validation errors" classname="functional.spec.ts" time="0.564">
+<properties>
+<property name="case" value="FT-06">
+</property>
+<property name="actual" value="UI: inline errors for reg. no., mobile, password and name; form not submitted">
+</property>
+</properties>
+</testcase>
+<testcase name="Authentication &amp; access › FT-41 logout ends the session" classname="functional.spec.ts" time="1.008">
+<properties>
+<property name="case" value="FT-41">
+</property>
+<property name="actual" value="UI: logout returns to /login; opening /complaints afterwards redirects to /login">
+</property>
+</properties>
+</testcase>
+<testcase name="Profile &amp; complaints › FT-07 profile update persists after reload" classname="functional.spec.ts" time="0.988">
+<properties>
+<property name="case" value="FT-07">
+</property>
+<property name="actual" value="UI: &apos;Profile updated&apos; toast; after reload mobile=9988776655, study=QUIET">
+</property>
+</properties>
+</testcase>
+<testcase name="Profile &amp; complaints › FT-08/FT-32 complaint is created in the UI and persists after reload" classname="functional.spec.ts" time="1.425">
+<properties>
+<property name="case" value="FT-08">
+</property>
+<property name="case" value="FT-32">
+</property>
+<property name="actual" value="UI: CMP-00008 created (status Open, forwarded to maintenance staff) and still listed after page reload">
+</property>
+</properties>
+</testcase>
+<testcase name="Profile &amp; complaints › FT-09 complaint form blocks missing required fields" classname="functional.spec.ts" time="0.83">
+<properties>
+<property name="case" value="FT-09">
+</property>
+<property name="actual" value="UI: three inline errors shown (category, title, description); dialog stays open, nothing submitted">
+</property>
+</properties>
+</testcase>
+<testcase name="Visitors, notices and SOS › FT-14/FT-15 student registers a visitor, warden approves, student sees approval" classname="functional.spec.ts" time="1.98">
+<properties>
+<property name="case" value="FT-14">
+</property>
+<property name="case" value="FT-15">
+</property>
+<property name="actual" value="UI: request shown Pending to student → warden approved with remark → student list shows Approved + &apos;Please carry ID&apos;">
+</property>
+</properties>
+</testcase>
+<testcase name="Visitors, notices and SOS › FT-17 past visit date is rejected in the form" classname="functional.spec.ts" time="0.942">
+<properties>
+<property name="case" value="FT-17">
+</property>
+<property name="actual" value="UI: &apos;Visit date cannot be in the past&apos; shown; no request created">
+</property>
+</properties>
+</testcase>
+<testcase name="Visitors, notices and SOS › FT-30 warden publishes a notice and students see it" classname="functional.spec.ts" time="2.35">
+<properties>
+<property name="case" value="FT-30">
+</property>
+<property name="actual" value="UI: notice published by warden; visible on student&apos;s notice board and in student&apos;s notifications">
+</property>
+</properties>
+</testcase>
+<testcase name="Visitors, notices and SOS › FT-20 SOS requires confirmation, reaches the warden, is acknowledged and resolved" classname="functional.spec.ts" time="2.158">
+<properties>
+<property name="case" value="FT-20">
+</property>
+<property name="actual" value="UI: confirmation dialog with demo disclaimer → alert Raised on warden board → Acknowledged → Resolved; student sees Resolved">
+</property>
+</properties>
+</testcase>
+</testsuite>
+<testsuite name="nonfunctional.spec.ts" timestamp="2026-10-18T16:55:52.064Z" hostname="chromium-desktop" tests="6" failures="0" skipped="0" time="32.675" errors="0">
+<testcase name="NFT-03 page load time of key pages is under 3 seconds" classname="nonfunctional.spec.ts" time="2.43">
+<properties>
+<property name="case" value="NFT-03">
+</property>
+<property name="actual" value="Avg time until content visible (3 loads each, local server): / 175 ms, /complaints 143 ms, /notices 133 ms, /delivery 146 ms; worst 175 ms">
+</property>
+</properties>
+</testcase>
+<testcase name="NFT-10 stored XSS payloads are rendered as text, not executed" classname="nonfunctional.spec.ts" time="2.088">
+<properties>
+<property name="case" value="NFT-10">
+</property>
+<property name="actual" value="Payloads shown literally to student and warden; JavaScript dialogs triggered: 0; injected &lt;img&gt; elements: 0; CSP header: present (script-src &apos;self&apos;)">
+</property>
+</properties>
+</testcase>
+<testcase name="NFT-15 automated accessibility scan (axe-core, WCAG 2.1 A/AA)" classname="nonfunctional.spec.ts" time="9.094">
+<properties>
+<property name="case" value="NFT-15">
+</property>
+<property name="actual" value="7 pages scanned. /login: 0 serious/critical rule(s); /: 0 serious/critical rule(s); /complaints: 0 serious/critical rule(s); /visitors: 0 serious/critical rule(s); /delivery: 0 serious/critical rule(s); /sos: 0 serious/critical rule(s); /profile: 0 serious/critical rule(s). Total serious/critical nodes: 0">
+</property>
+</properties>
+</testcase>
+<testcase name="NFT-16 keyboard-only navigation for login and complaint form" classname="nonfunctional.spec.ts" time="1.136">
+<properties>
+<property name="case" value="NFT-16">
+</property>
+<property name="actual" value="Login completed with Tab/typing/Enter only; complaint dialog opened with Enter, focus moved into the form, Escape closed it; &apos;Skip to content&apos; link is first in tab order">
+</property>
+</properties>
+</testcase>
+<testcase name="NFT-17 form errors are announced and linked to their fields" classname="nonfunctional.spec.ts" time="0.504">
+<properties>
+<property name="case" value="NFT-17">
+</property>
+<property name="actual" value="Empty registration submit: 6 inline errors with role=alert; inputs marked aria-invalid and linked via aria-describedby">
+</property>
+</properties>
+</testcase>
+<testcase name="NFT-18 responsive layout has no horizontal scrolling" classname="nonfunctional.spec.ts" time="17.423">
+<properties>
+<property name="case" value="NFT-18">
+</property>
+<property name="actual" value="8 pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: none">
+</property>
+</properties>
+</testcase>
+</testsuite>
+<testsuite name="smoke.spec.ts" timestamp="2026-10-18T16:55:52.064Z" hostname="chromium-desktop" tests="1" failures="0" skipped="0" time="1.003" errors="0">
+<testcase name="NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list" classname="smoke.spec.ts" time="1.003">
+<properties>
+<property name="case" value="NFT-26">
+</property>
+<property name="actual" value="chromium-desktop: login, dashboard, complaints and deliveries pages rendered and worked">
+</property>
+</properties>
+</testcase>
+</testsuite>
+<testsuite name="mobile.spec.ts" timestamp="2026-10-18T16:55:52.064Z" hostname="mobile-pixel5" tests="1" failures="0" skipped="0" time="1.02" errors="0">
+<testcase name="NFT-29 mobile viewport: login, menu, SOS button and complaint form work" classname="mobile.spec.ts" time="1.02">
+<properties>
+<property name="case" value="NFT-29">
+</property>
+<property name="actual" value="mobile-pixel5 (393x727, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow">
+</property>
+</properties>
+</testcase>
+</testsuite>
+<testsuite name="mobile.spec.ts" timestamp="2026-10-18T16:55:52.064Z" hostname="mobile-iphone12-chromium" tests="1" failures="0" skipped="0" time="1.097" errors="0">
+<testcase name="NFT-29 mobile viewport: login, menu, SOS button and complaint form work" classname="mobile.spec.ts" time="1.097">
+<properties>
+<property name="case" value="NFT-29">
+</property>
+<property name="actual" value="mobile-iphone12-chromium (390x664, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow">
+</property>
+</properties>
+</testcase>
+</testsuite>
+<testsuite name="smoke.spec.ts" timestamp="2026-10-18T16:55:52.064Z" hostname="firefox-desktop" tests="1" failures="1" skipped="0" time="0.003" errors="0">
+<testcase name="NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list" classname="smoke.spec.ts" time="0.003">
+<failure message="smoke.spec.ts:5:5 NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list" type="FAILURE">
+<![CDATA[  [firefox-desktop] › smoke.spec.ts:5:5 › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list 
+
+    Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/playwright-artifacts/smoke-NFT-26-27-28-cross-b-a45ea-n-dashboard-complaints-list-firefox-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/playwright-artifacts/smoke-NFT-26-27-28-cross-b-a45ea-n-dashboard-complaints-list-firefox-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|playwright-artifacts/smoke-NFT-26-27-28-cross-b-a45ea-n-dashboard-complaints-list-firefox-desktop/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="smoke.spec.ts" timestamp="2026-10-18T16:55:52.064Z" hostname="webkit-desktop" tests="1" failures="1" skipped="0" time="0.004" errors="0">
+<testcase name="NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list" classname="smoke.spec.ts" time="0.004">
+<failure message="smoke.spec.ts:5:5 NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list" type="FAILURE">
+<![CDATA[  [webkit-desktop] › smoke.spec.ts:5:5 › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list 
+
+    Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/webkit-2215/pw_run.sh
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../test-results/playwright-artifacts/smoke-NFT-26-27-28-cross-b-a45ea-n-dashboard-complaints-list-webkit-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../test-results/playwright-artifacts/smoke-NFT-26-27-28-cross-b-a45ea-n-dashboard-complaints-list-webkit-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|playwright-artifacts/smoke-NFT-26-27-28-cross-b-a45ea-n-dashboard-complaints-list-webkit-desktop/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

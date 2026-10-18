@@ -1,0 +1,133 @@
+[
+  {
+    "id": "NFT-04",
+    "status": "Pass",
+    "actual": "20 SOS alerts raised during a 150 virtual users (k6) load: server-side notify delay max 114.5 ms; alert visible on warden board avg 1295.0 ms, p95 1942.1 ms, max 2065.1 ms",
+    "evidence": "nft-results.json",
+    "metrics": {
+      "samples": 20,
+      "notify_delay_ms_max": 114.5,
+      "end_to_end_ms_avg": 1295.0,
+      "end_to_end_ms_p95": 1942.1,
+      "end_to_end_ms_max": 2065.1,
+      "background_load": "150 virtual users (k6)"
+    },
+    "executed_at": "2026-10-13T18:47:24.996760+00:00"
+  },
+  {
+    "id": "NFT-05",
+    "status": "Pass",
+    "actual": "With +20,000 complaints, +5,000 deliveries, +20,000 notifications: warden dashboard avg 34.1 ms; admin reports avg 93.6 ms; complaint search avg 65.6 ms; complaint page 500 avg 62.8 ms; student notifications avg 13.6 ms; all deliveries avg 345.3 ms. Slowest average 345.3 ms",
+    "evidence": "nft-results.json",
+    "metrics": {
+      "dataset": {
+        "complaints": 20000,
+        "deliveries": 5000,
+        "notifications": 20000
+      },
+      "endpoints": {
+        "warden dashboard": {
+          "avg_ms": 34.1,
+          "max_ms": 107.1
+        },
+        "admin reports": {
+          "avg_ms": 93.6,
+          "max_ms": 112.3
+        },
+        "complaint search": {
+          "avg_ms": 65.6,
+          "max_ms": 85.6
+        },
+        "complaint page 500": {
+          "avg_ms": 62.8,
+          "max_ms": 71.9
+        },
+        "student notifications": {
+          "avg_ms": 13.6,
+          "max_ms": 19.4
+        },
+        "all deliveries": {
+          "avg_ms": 345.3,
+          "max_ms": 460.0
+        }
+      }
+    },
+    "executed_at": "2026-10-13T18:47:34.645639+00:00"
+  },
+  {
+    "id": "NFT-22",
+    "status": "Pass",
+    "actual": "Complaint CMP-00258 created, API server stopped and restarted, record read back with HTTP 200 and identical data",
+    "evidence": "nft-results.json",
+    "metrics": {},
+    "executed_at": "2026-10-13T18:47:27.168129+00:00"
+  },
+  {
+    "id": "NFT-24",
+    "status": "Pass",
+    "actual": "pg_dump 0.8 MB in 0.2 s; restore into a new database in 0.4 s (target < 2 h); row counts of 8 tables identical (e.g. complaints 20,258). Daily scheduling is a deployment task (scripts/backup_db.sh + cron) and was not run here",
+    "evidence": "scripts/backup_db.sh, scripts/restore_db.sh",
+    "metrics": {
+      "backup_s": 0.16,
+      "restore_s": 0.44,
+      "counts": {
+        "source": {
+          "users": 65,
+          "complaints": 20258,
+          "complaint_updates": 263,
+          "visitor_requests": 4,
+          "delivery_requests": 5001,
+          "notifications": 20583,
+          "audit_logs": 307,
+          "sos_alerts": 20
+        },
+        "restored": {
+          "users": 65,
+          "complaints": 20258,
+          "complaint_updates": 263,
+          "visitor_requests": 4,
+          "delivery_requests": 5001,
+          "notifications": 20583,
+          "audit_logs": 307,
+          "sos_alerts": 20
+        }
+      }
+    },
+    "executed_at": "2026-10-13T18:47:35.796393+00:00"
+  },
+  {
+    "id": "NFT-30",
+    "status": "Pass",
+    "actual": "ESLint: 0 errors, 0 warnings in 46 files; TypeScript strict: 0 errors; Ruff (Python): 0 issues",
+    "evidence": "eslint.config.js, tsconfig.json, backend/ruff.toml",
+    "metrics": {},
+    "executed_at": "2026-10-13T18:46:12.097291+00:00"
+  },
+  {
+    "id": "NFT-31",
+    "status": "Pass",
+    "actual": "Production build succeeded in 8.5 s; JavaScript bundle 341 KB (uncompressed)",
+    "evidence": "frontend/dist",
+    "metrics": {},
+    "executed_at": "2026-10-13T18:46:20.602204+00:00"
+  },
+  {
+    "id": "NFT-32",
+    "status": "Pass",
+    "actual": "Empty database initialised and seeded in 1.6 s (26 tables, 65 users); API health OK on the fresh DB; .env.example covers 15/15 variables read by the code",
+    "evidence": "backend/app/seed.py, .env.example, Dockerfile",
+    "metrics": {},
+    "executed_at": "2026-10-13T18:46:23.735140+00:00"
+  },
+  {
+    "id": "NFT-34",
+    "status": "Fail",
+    "actual": "Passwords and OTPs are hashed, but student phone numbers, registration numbers and visitor phone numbers are stored as plain text (e.g. phone '984*******'); local PostgreSQL ssl=off. Encryption in transit relies on HTTPS at the hosting provider (HSTS header is sent in production) and could not be verified locally. NFR06 (encrypted at rest) is NOT met by the application",
+    "evidence": "Defect DEF-04",
+    "metrics": {
+      "plaintext_pii": true,
+      "postgres_ssl": "off"
+    },
+    "executed_at": "2026-10-13T18:47:34.651930+00:00"
+  }
+]

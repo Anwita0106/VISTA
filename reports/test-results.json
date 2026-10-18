@@ -1,0 +1,3045 @@
+{
+  "project": "VISTA – Smart Hostel & Accommodation Management System",
+  "generated_at": "2026-10-18T16:57:05.111436+00:00",
+  "environment": {
+    "os": "Linux 6.18.44-fc-v139",
+    "cpu_count": 2,
+    "python": "3.13.16",
+    "node": "v22.22.0",
+    "postgresql": "psql (PostgreSQL) 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)",
+    "k6": "k6 v0.54.0 (commit/baba871c8a, go1.23.1, linux/amd64)",
+    "chromium": "Chromium 141.0.7390.37",
+    "note": "All tests executed locally in a cloud Linux container (2 vCPU). The API, PostgreSQL and the load generator share the same machine."
+  },
+  "definitions": {
+    "executed": "Pass or Fail outcome",
+    "pass_percentage": "passed / executed x 100; N/A if nothing executed",
+    "blocked": "could not run because of the environment",
+    "not_run": "requires resources not available (users, 30-day monitoring)"
+  },
+  "summary": {
+    "functional": {
+      "total": 43,
+      "passed": 43,
+      "failed": 0,
+      "blocked": 0,
+      "not_run": 0,
+      "executed": 43,
+      "pass_percentage": 100.0
+    },
+    "nonfunctional": {
+      "total": 34,
+      "passed": 28,
+      "failed": 2,
+      "blocked": 2,
+      "not_run": 2,
+      "executed": 30,
+      "pass_percentage": 93.3
+    },
+    "tools": {
+      "pytest": {
+        "total": 61,
+        "passed": 61,
+        "failed": 0,
+        "blocked": 0,
+        "skipped": 0
+      },
+      "vitest": {
+        "total": 14,
+        "passed": 14,
+        "failed": 0,
+        "blocked": 0,
+        "skipped": 0
+      },
+      "playwright": {
+        "total": 25,
+        "passed": 23,
+        "failed": 0,
+        "blocked": 2,
+        "skipped": 0
+      },
+      "k6": {
+        "runs": 4,
+        "labels": [
+          "background-sos",
+          "normal-50vus",
+          "peak-150vus",
+          "peak-300vus"
+        ]
+      },
+      "nft_runner": {
+        "checks": 8,
+        "passed": 7,
+        "failed": 1
+      }
+    }
+  },
+  "functional_cases": [
+    {
+      "id": "FT-01",
+      "module": "Authentication",
+      "description": "Login with valid student credentials",
+      "preconditions": "Seeded student account exists",
+      "steps": "1. Open login page  2. Enter email and password  3. Click Sign in",
+      "data": "priya.sharma@vista.demo / Student@123",
+      "expected": "Token issued; student dashboard opens with role 'Student' and SOS button",
+      "requirements": "FR04",
+      "status": "Pass",
+      "actual": "API: HTTP 200; JWT issued; role=STUDENT; room=G-101\nUI: redirected to dashboard 'Good evening, Priya', role label 'Student', SOS button visible",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_auth.py::test_ft01_valid_login",
+        "[chromium-desktop] functional.spec.ts › FT-01 valid student login opens the student dashboard"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-02",
+      "module": "Authentication",
+      "description": "Login with an invalid password",
+      "preconditions": "Account exists",
+      "steps": "1. Enter valid email + wrong password  2. Sign in  3. Repeat with unknown email",
+      "data": "arjun.nair@vista.demo / NotMyPass1",
+      "expected": "401 'Invalid email or password'; same message for unknown email; stays on login page",
+      "requirements": "FR04",
+      "status": "Pass",
+      "actual": "API: HTTP 401 'Invalid email or password' for wrong password and for unknown email (same message)\nUI: error 'Invalid email or password' displayed; URL stays /login",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_auth.py::test_ft02_invalid_login",
+        "[chromium-desktop] functional.spec.ts › FT-02 invalid password shows an error and stays on login"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-03",
+      "module": "Authentication",
+      "description": "Role-based dashboard and menu",
+      "preconditions": "Student and warden accounts",
+      "steps": "1. Log in as student  2. Log in as warden  3. Compare dashboard cards and menu",
+      "data": "Priya (student), warden.lh",
+      "expected": "Student sees student cards + Vault; warden sees management cards (SOS, escalations) + Users",
+      "requirements": "FR04, FR17, FR19",
+      "status": "Pass",
+      "actual": "API: Student dashboard cards=['active_deliveries', 'active_services', 'open_complaints', 'pending_visitors']; warden dashboard has 8 management cards incl. active_sos\nUI: student menu shows Document Vault, no Users; warden menu shows Users/Hostels, no Vault; warden dashboard shows Active SOS card",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_auth.py::test_ft03_role_based_dashboard",
+        "[chromium-desktop] functional.spec.ts › FT-03 navigation is role-specific"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-04",
+      "module": "Access control",
+      "description": "Student attempts administrator operations",
+      "preconditions": "Logged in as student",
+      "steps": "1. Call admin user creation, audit log, visitor decision, notice publishing  2. Open /admin/users in UI",
+      "data": "Student token",
+      "expected": "Backend returns 403 for every call; UI shows 'Access denied'",
+      "requirements": "FR04, NFR05",
+      "status": "Pass",
+      "actual": "API: Student received 403 Forbidden on POST /api/admin/users, GET /api/admin/audit-logs, PATCH /api/visitors/1/decision, POST /api/notices\nUI: /admin/users as student shows '403 Access denied' page",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_auth.py::test_ft04_student_blocked_from_admin",
+        "[chromium-desktop] functional.spec.ts › FT-04 student opening an admin page gets access denied"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-05",
+      "module": "Registration",
+      "description": "Student self-registration with valid data",
+      "preconditions": "Email and reg. no. not used",
+      "steps": "1. Submit registration form  2. Submit again with same reg. no.  3. Log in with new account",
+      "data": "25BCE9001, new.student@vista.demo",
+      "expected": "201 Created as STUDENT; duplicate reg. no. -> 409; new account can log in",
+      "requirements": "FR01",
+      "status": "Pass",
+      "actual": "API: 201 Created (role STUDENT); duplicate reg no -> 409 'An account with this registration number already exists'; new account can log in",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_auth.py::test_ft05_student_registration"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-06",
+      "module": "Registration",
+      "description": "Registration input validation",
+      "preconditions": "None",
+      "steps": "1. Submit form with invalid reg. no., phone, weak password, bad email, script in name",
+      "data": "ABC123, 12345, 'short', '<script>'",
+      "expected": "Each invalid field rejected (422 / inline error); nothing saved",
+      "requirements": "FR01",
+      "status": "Pass",
+      "actual": "API: reg_no='ABC123' -> 422 'reg_no: Registration number must look like 24BYB0193'; phone='12345' -> 422 'phone: Phone must be a valid 10-digit Indian mobile number'; password='short' -> 422 'password: Password must be at least 8 characters and contain letters a'; email='not-an-email' -> 422 'email: value is not a valid email address: An email address must have '; full_name='<script>' -> 422 'full_name: Name may contain only letters, spaces, dots, hyphens and ap'\nUI: inline errors for reg. no., mobile, password and name; form not submitted",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_auth.py::test_ft06_registration_validation[reg_no-ABC123]",
+        "tests/test_auth.py::test_ft06_registration_validation[phone-12345]",
+        "tests/test_auth.py::test_ft06_registration_validation[password-short]",
+        "tests/test_auth.py::test_ft06_registration_validation[email-not-an-email]",
+        "tests/test_auth.py::test_ft06_registration_validation[full_name-<script>]",
+        "[chromium-desktop] functional.spec.ts › FT-06 registration form shows field validation errors"
+      ],
+      "defects": "DEF-07 (fixed)",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-07",
+      "module": "Profile",
+      "description": "Update profile and roommate preferences",
+      "preconditions": "Logged in as student",
+      "steps": "1. Edit mobile + preferences  2. Save  3. Reload page  4. Try invalid phone",
+      "data": "9988776655, QUIET / LATE",
+      "expected": "Changes saved and shown after reload; invalid phone rejected",
+      "requirements": "FR05",
+      "status": "Pass",
+      "actual": "API: Profile saved and re-read: phone=9000011111, pref_sleep=LATE; invalid phone -> 422\nUI: 'Profile updated' toast; after reload mobile=9988776655, study=QUIET",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_auth.py::test_ft07_profile_update_persists",
+        "[chromium-desktop] functional.spec.ts › FT-07 profile update persists after reload"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-08",
+      "module": "Complaints",
+      "description": "Register an electrical/plumbing complaint",
+      "preconditions": "Student with room",
+      "steps": "1. New complaint  2. Choose category, title, description  3. Submit",
+      "data": "PLUMBING, 'Bathroom tap leaking'",
+      "expected": "Complaint code CMP-xxxxx created, status OPEN, forwarded to maintenance staff who is notified",
+      "requirements": "FR10, FR11",
+      "status": "Pass",
+      "actual": "API: 201; CMP-00008 OPEN, priority MEDIUM; auto-forwarded to Ramesh Electricals (MAINTENANCE) and notified\nUI: CMP-00008 created (status Open, forwarded to maintenance staff) and still listed after page reload",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_complaints.py::test_ft08_register_complaint_forwarded",
+        "[chromium-desktop] functional.spec.ts › FT-08/FT-32 complaint is created in the UI and persists after reload"
+      ],
+      "defects": "DEF-07 (fixed)",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-09",
+      "module": "Complaints",
+      "description": "Complaint with missing required fields",
+      "preconditions": "Logged in as student",
+      "steps": "1. Submit empty complaint form  2. Submit without category  3. Invalid category",
+      "data": "Empty title / description",
+      "expected": "Inline errors in UI; API returns 422; nothing stored",
+      "requirements": "FR10",
+      "status": "Pass",
+      "actual": "API: Empty title/description -> 422 'title: String should have at least 5 characters'; missing category -> 422; invalid category -> 422\nUI: three inline errors shown (category, title, description); dialog stays open, nothing submitted",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_complaints.py::test_ft09_complaint_missing_fields",
+        "[chromium-desktop] functional.spec.ts › FT-09 complaint form blocks missing required fields"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-10",
+      "module": "Complaints",
+      "description": "Washroom and water complaints get HIGH priority",
+      "preconditions": "Logged in as student",
+      "steps": "1. Raise WASHROOM complaint with LOW priority  2. Raise WATER complaint with MEDIUM",
+      "data": "WASHROOM/LOW, WATER/MEDIUM",
+      "expected": "Both stored with priority HIGH",
+      "requirements": "FR23",
+      "status": "Pass",
+      "actual": "API: WASHROOM requested LOW -> stored HIGH; WATER requested MEDIUM -> stored HIGH",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_complaints.py::test_ft10_washroom_water_high_priority"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-11",
+      "module": "Complaints",
+      "description": "Staff updates complaint status to resolved",
+      "preconditions": "Complaint assigned to staff",
+      "steps": "1. Staff marks IN_PROGRESS with note  2. Marks RESOLVED  3. Student closes",
+      "data": "Notes: 'Visiting at 4 PM', 'Latch replaced'",
+      "expected": "Status changes saved, history shows each step, student notified",
+      "requirements": "FR10, FR33",
+      "status": "Pass",
+      "actual": "API: OPEN -> IN_PROGRESS -> RESOLVED by assigned staff, CLOSED by student; history has 4 entries; student notified",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_complaints.py::test_ft11_staff_updates_status"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-12",
+      "module": "Complaints",
+      "description": "Invalid complaint status changes are blocked",
+      "preconditions": "Open complaint",
+      "steps": "1. Staff tries CLOSED  2. Student tries RESOLVED  3. Another student opens it  4. Change a CLOSED complaint",
+      "data": "-",
+      "expected": "403 / 404 / 409 respectively; status unchanged",
+      "requirements": "FR10, NFR05",
+      "status": "Pass",
+      "actual": "API: Staff CLOSE -> 403; student RESOLVE -> 403; other student view -> 404; CLOSED -> IN_PROGRESS -> 409 'Invalid status change from CLOSED to IN_PROGRESS'",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_complaints.py::test_ft12_invalid_complaint_transitions"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-13",
+      "module": "Complaints",
+      "description": "Escalation of unresolved complaint to chief warden",
+      "preconditions": "HIGH complaint older than 24 h",
+      "steps": "1. Age complaint by 25 h  2. Run escalation check  3. View as chief warden",
+      "data": "SLA: HIGH 24 h, MEDIUM 48 h, LOW 72 h",
+      "expected": "Complaint becomes ESCALATED, assigned to chief warden, chief warden notified; new complaints untouched",
+      "requirements": "FR12",
+      "status": "Pass",
+      "actual": "API: HIGH complaint aged 25 h escalated to Dr. Lakshmi Narayanan; 0-h LOW complaint not escalated; chief warden notified",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_complaints.py::test_ft13_escalation_rule"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-14",
+      "module": "Visitors",
+      "description": "Student registers a visitor",
+      "preconditions": "Logged in as student",
+      "steps": "1. Fill visitor name, relation, phone, date, time  2. Submit  3. Submit duplicate",
+      "data": "Sunil Reddy, PARENT, +3 days 10:00-12:00",
+      "expected": "Request PENDING; wardens notified; duplicate -> 409",
+      "requirements": "FR13",
+      "status": "Pass",
+      "actual": "API: 201 PENDING; 12 warden notifications; duplicate same visitor/date -> 409\nUI: request shown Pending to student → warden approved with remark → student list shows Approved + 'Please carry ID'",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_visitors_services_sos.py::test_ft14_visitor_registration",
+        "[chromium-desktop] functional.spec.ts › FT-14/FT-15 student registers a visitor, warden approves, student sees approval"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-15",
+      "module": "Visitors",
+      "description": "Warden approves a visitor request",
+      "preconditions": "Pending request",
+      "steps": "1. Warden opens Visitors  2. Approve with remark  3. Student checks status",
+      "data": "Remark 'Please carry ID'",
+      "expected": "Status APPROVED shown to student with remark; notification sent; second decision -> 409",
+      "requirements": "FR14, FR33",
+      "status": "Pass",
+      "actual": "API: Warden approval -> 200 APPROVED; student sees APPROVED and gets notification; deciding again -> 409\nUI: request shown Pending to student → warden approved with remark → student list shows Approved + 'Please carry ID'",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_visitors_services_sos.py::test_ft15_warden_approves",
+        "[chromium-desktop] functional.spec.ts › FT-14/FT-15 student registers a visitor, warden approves, student sees approval"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-16",
+      "module": "Visitors",
+      "description": "Warden rejects a visitor request",
+      "preconditions": "Pending request",
+      "steps": "1. Reject without reason  2. Reject with reason",
+      "data": "Reason 'Friends only on weekends'",
+      "expected": "No reason -> 422; with reason -> REJECTED and remark shown to student",
+      "requirements": "FR14",
+      "status": "Pass",
+      "actual": "API: Reject without reason -> 422 'Please give a reason when rejecting a visitor request'; with reason -> REJECTED, remark shown to student",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_visitors_services_sos.py::test_ft16_warden_rejects"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-17",
+      "module": "Visitors",
+      "description": "Invalid visitor date and time",
+      "preconditions": "Logged in as student",
+      "steps": "1. Past date  2. Date > 30 days ahead  3. Malformed date  4. End before start  5. Outside 08:00-20:00",
+      "data": "2020-01-01, +45 days, 15:00-14:00",
+      "expected": "Each rejected with a clear message (422 / inline error)",
+      "requirements": "FR13",
+      "status": "Pass",
+      "actual": "API: past date -> 422 'Visit date cannot be in the past'; more than 30 days ahead -> 422 'Visits can be requested at most 30 days in advance'; malformed date -> 422 'Visit date must be a valid date (YYYY-MM-DD)'; end before start -> 422 'Visit end time must be after the start time'; outside visiting hours -> 422 'Visiting hours are 08:00 to 20:00'; missing phone -> 422 'visitor_phone: Phone must be a valid 10-digit Indian mobile '\nUI: 'Visit date cannot be in the past' shown; no request created",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[past date-data0-422]",
+        "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[more than 30 days ahead-data1-422]",
+        "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[malformed date-data2-422]",
+        "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[end before start-data3-422]",
+        "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[outside visiting hours-data4-422]",
+        "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[missing phone-data5-422]",
+        "[chromium-desktop] functional.spec.ts › FT-17 past visit date is rejected in the form"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-18",
+      "module": "Hostel services",
+      "description": "Sick-meal request and fulfilment",
+      "preconditions": "Student with room; mess staff",
+      "steps": "1. Request DINNER sick meal  2. Mess staff accepts  3. Marks completed",
+      "data": "Diet note 'Soft food'",
+      "expected": "PENDING -> ACCEPTED -> COMPLETED; only mess staff can act",
+      "requirements": "FR15",
+      "status": "Pass",
+      "actual": "API: Sick meal 201 PENDING -> in mess queue -> ACCEPTED -> COMPLETED by mess staff; cleaning staff -> 403",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_visitors_services_sos.py::test_ft18_sick_meal_request"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-19",
+      "module": "Hostel services",
+      "description": "Room-cleaning request",
+      "preconditions": "Student with room",
+      "steps": "1. Request MORNING cleaning  2. Duplicate  3. Missing slot  4. Date > 7 days",
+      "data": "Tomorrow, MORNING",
+      "expected": "Created and visible to cleaning staff; invalid requests rejected",
+      "requirements": "FR16",
+      "status": "Pass",
+      "actual": "API: Cleaning 201 PENDING visible to cleaning staff; duplicate -> 409; missing slot -> 422; date > 7 days -> 422",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_visitors_services_sos.py::test_ft19_room_cleaning_request"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-20",
+      "module": "Emergency SOS",
+      "description": "Raise, acknowledge and resolve an SOS",
+      "preconditions": "Student, warden and security accounts",
+      "steps": "1. Click SOS  2. Confirm in dialog  3. Warden acknowledges  4. Resolves with note",
+      "data": "'Twisted ankle on stairs'",
+      "expected": "Alert stored with timestamps; warden + security notified < 5 s; RAISED -> ACKNOWLEDGED -> RESOLVED",
+      "requirements": "FR22, NFR03",
+      "status": "Pass",
+      "actual": "API: SOS RAISED, 6 responders (warden, chief, security) notified in 2.2 ms (API round trip 15 ms); resolve-before-ack -> 409; ACKNOWLEDGED -> RESOLVED with timestamps\nUI: confirmation dialog with demo disclaimer → alert Raised on warden board → Acknowledged → Resolved; student sees Resolved",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_visitors_services_sos.py::test_ft20_sos_raise_ack_resolve",
+        "[chromium-desktop] functional.spec.ts › FT-20 SOS requires confirmation, reaches the warden, is acknowledged and resolved"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-21",
+      "module": "Emergency SOS",
+      "description": "SOS without confirmation / by unauthorised role",
+      "preconditions": "Logged in",
+      "steps": "1. Send SOS with confirm=false  2. Maintenance staff tries to raise / acknowledge",
+      "data": "confirm=false",
+      "expected": "400 and no alert stored; staff without security role -> 403",
+      "requirements": "FR22",
+      "status": "Pass",
+      "actual": "API: Unconfirmed SOS -> 400 'SOS must be confirmed before it is sent', no alert stored; maintenance staff cannot acknowledge (403)",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_visitors_services_sos.py::test_ft21_sos_requires_confirmation_and_role"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-22",
+      "module": "P2P delivery",
+      "description": "Create an inter-hostel delivery request (₹10)",
+      "preconditions": "Sender and receiver in different hostels",
+      "steps": "1. Send an item  2. Enter receiver reg. no. + item  3. Confirm ₹10 fee  4. Try same-hostel receiver",
+      "data": "Receiver 24BCE1001",
+      "expected": "Request OPEN, fee ₹10, demo receipt issued; same hostel / unconfirmed fee / unknown receiver rejected",
+      "requirements": "FR28",
+      "status": "Pass",
+      "actual": "API: 201 DLV-00002 OPEN, fee ₹10, demo receipt RCPT-DEMO-000002, Men's Hostel North -> Ladies Hostel East; same-hostel receiver -> 400; fee not confirmed -> 400; unknown receiver -> 404\nUI: DLV-00002 posted with ₹10 demo fee → accepted & picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_delivery.py::test_ft22_create_delivery_request",
+        "[chromium-desktop] delivery.spec.ts › FT-22/FT-23/FT-24 P2P delivery end to end with OTP handover"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-23",
+      "module": "P2P delivery",
+      "description": "Carrier accepts a delivery",
+      "preconditions": "Open delivery request",
+      "steps": "1. Another student opens 'Available to carry'  2. Accepts  3. Sender/receiver/second carrier try to accept",
+      "data": "Carrier Vikram / Arjun",
+      "expected": "ACCEPTED with carrier recorded; sender/receiver -> 400; second carrier -> 409",
+      "requirements": "FR28",
+      "status": "Pass",
+      "actual": "API: Listed as available; sender/receiver accept -> 400; Vikram accepts -> ACCEPTED; second carrier -> 409 'This delivery has already been taken by another carrier'\nUI: DLV-00002 posted with ₹10 demo fee → accepted & picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_delivery.py::test_ft23_carrier_acceptance",
+        "[chromium-desktop] delivery.spec.ts › FT-22/FT-23/FT-24 P2P delivery end to end with OTP handover"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-24",
+      "module": "P2P delivery",
+      "description": "Handover with valid OTP",
+      "preconditions": "Delivery picked up",
+      "steps": "1. Carrier marks picked up  2. Receiver reads OTP  3. Carrier enters OTP",
+      "data": "6-digit OTP from receiver",
+      "expected": "OTP only visible to receiver; status DELIVERED; OTP cleared",
+      "requirements": "FR30",
+      "status": "Pass",
+      "actual": "API: OTP visible only to receiver (hidden from carrier); carrier entered it -> 200 DELIVERED; OTP cleared after use\nUI: DLV-00002 posted with ₹10 demo fee → accepted & picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_delivery.py::test_ft24_valid_otp_completes_delivery",
+        "[chromium-desktop] delivery.spec.ts › FT-22/FT-23/FT-24 P2P delivery end to end with OTP handover"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-25",
+      "module": "P2P delivery",
+      "description": "Handover with invalid OTP",
+      "preconditions": "Delivery picked up",
+      "steps": "1. Carrier enters wrong OTP  2. Non-numeric OTP  3. Sender enters OTP",
+      "data": "000000, '12ab'",
+      "expected": "400 with attempts left; 422; 403; status stays PICKED_UP",
+      "requirements": "FR30",
+      "status": "Pass",
+      "actual": "API: Wrong OTP -> 400 'Incorrect OTP. 2 attempt(s) left.'; non-numeric -> 422; sender entering OTP -> 403; status stays PICKED_UP",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_delivery.py::test_ft25_invalid_otp"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-26",
+      "module": "P2P delivery",
+      "description": "OTP lock after 3 attempts and expiry",
+      "preconditions": "Delivery picked up",
+      "steps": "1. Enter wrong OTP 3 times  2. Enter correct OTP  3. Re-issue OTP and let it expire  4. Re-issue limit",
+      "data": "3 x 000000; expiry 10 min",
+      "expected": "Locked (423) after 3rd wrong try; expired -> 410; at most 3 OTPs per delivery",
+      "requirements": "FR30, NFR08",
+      "status": "Pass",
+      "actual": "API: 3 wrong OTPs -> 400, 400, 423 (locked); correct OTP after lock -> 410; expired OTP -> 410 'OTP has expired or is not active. Ask for a new OTP.'; OTP re-issue capped at 3 (4th -> 409)",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_delivery.py::test_ft26_otp_lockout_and_expiry"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-27",
+      "module": "P2P delivery",
+      "description": "Invalid delivery state transitions",
+      "preconditions": "Open / accepted delivery",
+      "steps": "1. Verify OTP before pickup  2. Pickup by non-carrier  3. Cancel after acceptance  4. Fail before pickup",
+      "data": "-",
+      "expected": "403 / 409 responses; state unchanged",
+      "requirements": "FR28, NFR13",
+      "status": "Pass",
+      "actual": "API: Non-carrier verify/pickup -> 403; cancel after ACCEPTED -> 409 'Invalid delivery state change from ACCEPTED to CANCELLED'; fail before pickup -> 409",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_delivery.py::test_ft27_invalid_delivery_transitions"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-28",
+      "module": "P2P delivery",
+      "description": "Handover with QR code + photo + receiver details",
+      "preconditions": "Delivery picked up",
+      "steps": "1. Carrier scans receiver's QR  2. Uploads parcel photo  3. Enters name, reg. no., room, block",
+      "data": "Kavya Reddy, 24BIT1005, 203, H",
+      "expected": "Wrong details / forged QR / fake image rejected; correct data -> DELIVERED with photo stored",
+      "requirements": "FR29",
+      "status": "Pass",
+      "actual": "API: Wrong room -> 400 'Verification failed: room number did not match'; forged QR -> 400; fake image -> 415; correct QR + photo + details -> DELIVERED with photo stored",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_delivery.py::test_ft28_qr_photo_verification"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-29",
+      "module": "Gate delivery",
+      "description": "Parcel reservation with courier name and gate OTP",
+      "preconditions": "Student; security staff",
+      "steps": "1. Book parcel with courier name  2. Security marks arrived  3. Verifies student's OTP",
+      "data": "BlueDart, courier Ravi Kumar",
+      "expected": "BOOKED -> AT_GATE -> COLLECTED; missing courier name, wrong OTP and non-security staff rejected",
+      "requirements": "FR27, FR31",
+      "status": "Pass",
+      "actual": "API: Missing courier name -> 422; GATE-00001 BOOKED with courier 'Ravi Kumar'; collect before arrival -> 409; security marks AT_GATE; wrong OTP -> 400; maintenance staff -> 403; correct OTP -> COLLECTED",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_delivery.py::test_ft29_gate_parcel_reservation"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-30",
+      "module": "Notices",
+      "description": "Warden publishes a notice",
+      "preconditions": "Warden account",
+      "steps": "1. Publish notice to Ladies Hostel East  2. Student of that hostel views board  3. Student of other hostel views",
+      "data": "'Fire drill on Friday' (URGENT)",
+      "expected": "Notice visible to target hostel only; students notified; empty notice -> 422",
+      "requirements": "FR34, FR17, FR33",
+      "status": "Pass",
+      "actual": "API: Warden published URGENT notice to Ladies Hostel East; shown to Priya, hidden from Men's hostel student; 15 students notified; empty notice -> 422\nUI: notice published by warden; visible on student's notice board and in student's notifications",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft30_notice_publish_and_display",
+        "[chromium-desktop] functional.spec.ts › FT-30 warden publishes a notice and students see it"
+      ],
+      "defects": "DEF-07 (fixed)",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-31",
+      "module": "Access control",
+      "description": "Unauthorised administrative actions by staff/wardens",
+      "preconditions": "Warden, security, maintenance accounts",
+      "steps": "1. Warden deactivates user / creates hostel  2. Security approves visitor  3. Maintenance views audit log",
+      "data": "-",
+      "expected": "403 for every attempt",
+      "requirements": "FR04, NFR05",
+      "status": "Pass",
+      "actual": "API: 403 for: warden deactivates user; warden creates hostel; security approves visitor; maintenance views audit log",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_auth.py::test_ft31_unauthorized_admin_actions"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-32",
+      "module": "Persistence",
+      "description": "Data persists after page reload",
+      "preconditions": "Complaint just created",
+      "steps": "1. Create complaint in UI  2. Reload the page",
+      "data": "-",
+      "expected": "Complaint still listed with the same code",
+      "requirements": "NFR13",
+      "status": "Pass",
+      "actual": "UI: CMP-00008 created (status Open, forwarded to maintenance staff) and still listed after page reload",
+      "automated_by": [
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "[chromium-desktop] functional.spec.ts › FT-08/FT-32 complaint is created in the UI and persists after reload"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-33",
+      "module": "Community",
+      "description": "Report and search lost & found items",
+      "preconditions": "Logged in",
+      "steps": "1. Report lost umbrella  2. Search 'umbrella'  3. Another student closes it  4. Reporter closes it",
+      "data": "Black umbrella, R block lobby",
+      "expected": "Item found by search; only reporter/warden can mark returned; future date rejected",
+      "requirements": "FR18",
+      "status": "Pass",
+      "actual": "API: Lost item reported (201) and found by keyword search; future date -> 422; only reporter can close (others 403)",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft33_lost_and_found"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-34",
+      "module": "Community",
+      "description": "Marketplace listing and sale",
+      "preconditions": "Student accounts",
+      "steps": "1. List item  2. Negative price  3. Non-seller marks sold  4. Seller marks sold  5. Sort by price",
+      "data": "Drafter set ₹250",
+      "expected": "Listing created; invalid / unauthorised changes rejected; sold items hidden; sorting correct",
+      "requirements": "FR26",
+      "status": "Pass",
+      "actual": "API: Listing 201; negative price -> 422; non-seller mark sold -> 403; sold item hidden from listings; price sort ascending verified",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft34_marketplace"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-35",
+      "module": "Community",
+      "description": "Notes sharing and private document vault",
+      "preconditions": "Student accounts",
+      "steps": "1. Share note with PDF  2. Upload vault document  3. Other student tries to download  4. Upload .exe / > 2 MB",
+      "data": "allot.pdf, x.exe, 2 MB+",
+      "expected": "Notes readable by classmates; vault file only for owner (404 for others); bad files rejected",
+      "requirements": "FR24, FR25",
+      "status": "Pass",
+      "actual": "API: Note with PDF shared and readable by classmates; vault file downloadable by owner, other student -> 404; .exe -> 415; >2 MB -> 413",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft35_notes_and_vault"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-36",
+      "module": "Community",
+      "description": "Mess feedback",
+      "preconditions": "Student account",
+      "steps": "1. Rate breakfast  2. Rate same meal again  3. Rating out of range",
+      "data": "Food 4, service 5; rating 7",
+      "expected": "Saved; duplicate -> 409; invalid -> 422; mess staff sees averages",
+      "requirements": "FR21",
+      "status": "Pass",
+      "actual": "API: Feedback 201; same meal twice -> 409; rating 7 -> 422; mess staff summary shows BREAKFAST avg 3.0",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft36_mess_feedback"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-37",
+      "module": "Accommodation",
+      "description": "Roommate finder",
+      "preconditions": "Students with preferences",
+      "steps": "1. Open roommate finder  2. Warden calls the same API",
+      "data": "Priya's preferences",
+      "expected": "Same-gender matches ranked by preference score; rooms with free beds; warden -> 403",
+      "requirements": "FR09",
+      "status": "Pass",
+      "actual": "API: 9 same-gender matches ranked by preference score (top Sneha Das 3/3); 46 rooms with free beds listed",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft37_roommate_finder"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-38",
+      "module": "Accommodation",
+      "description": "Room allocation rules",
+      "preconditions": "Admin; student without room",
+      "steps": "1. Allocate female student to boys' hostel  2. To ladies' room  3. To full room  4. Student allocates  5. Duplicate room no.",
+      "data": "Room G-xxx",
+      "expected": "Wrong hostel 400; valid 200; full 409; student 403; duplicate room 409",
+      "requirements": "FR06, FR07, FR08",
+      "status": "Pass",
+      "actual": "API: Female student -> boys' hostel 400; -> G-104 200; full room -> 409; student allocating -> 403; duplicate room number -> 409",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft38_room_allocation_rules"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-39",
+      "module": "Reports",
+      "description": "Admin reports match stored data and export CSV",
+      "preconditions": "Admin account",
+      "steps": "1. Open reports  2. Compare totals with database  3. Export complaints CSV  4. Warden opens reports",
+      "data": "-",
+      "expected": "Report totals equal DB counts; CSV rows = complaints; warden -> 403",
+      "requirements": "FR19, FR35",
+      "status": "Pass",
+      "actual": "API: Report complaint total 7 = DB count; students 57 = DB count; CSV export has 7 rows + header; warden -> 403",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft39_reports_match_database"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-40",
+      "module": "Messaging",
+      "description": "In-app messaging between student and warden",
+      "preconditions": "Student and warden",
+      "steps": "1. Student sends message  2. Warden opens conversation  3. Empty message",
+      "data": "'Can my parents visit on Sunday?'",
+      "expected": "Message delivered with unread count, marked read when opened; empty -> 422",
+      "requirements": "FR32",
+      "status": "Pass",
+      "actual": "API: Student -> warden message delivered (unread=1), shown in thread, marked read on open (unread=0); empty message -> 422",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft40_in_app_messaging"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-41",
+      "module": "Authentication",
+      "description": "Logout invalidates the session",
+      "preconditions": "Logged-in user",
+      "steps": "1. Log out  2. Reuse old token / open protected page",
+      "data": "-",
+      "expected": "Token rejected with 401; UI redirects to login",
+      "requirements": "FR04",
+      "status": "Pass",
+      "actual": "API: Logout 200; reusing the same token -> 401 'Session has been logged out'\nUI: logout returns to /login; opening /complaints afterwards redirects to /login",
+      "automated_by": [
+        "API (pytest)",
+        "UI (Playwright)"
+      ],
+      "linked_tests": [
+        "tests/test_auth.py::test_ft41_logout_revokes_token",
+        "[chromium-desktop] functional.spec.ts › FT-41 logout ends the session"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-42",
+      "module": "Registration",
+      "description": "Administrator registers warden, staff and admin accounts",
+      "preconditions": "Logged in as admin",
+      "steps": "1. Create WARDEN, STAFF (security) and ADMIN users  2. Each logs in  3. Staff without type  4. Duplicate email",
+      "data": "new.warden@vista.demo / Strong123",
+      "expected": "Accounts created with the right role and can log in; invalid / duplicate rejected",
+      "requirements": "FR02, FR03",
+      "status": "Pass",
+      "actual": "API: Admin created WARDEN, STAFF (SECURITY) and ADMIN accounts (201) and each could log in; staff without type -> 422; duplicate email -> 409",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft42_admin_registers_staff_warden_admin"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    },
+    {
+      "id": "FT-43",
+      "module": "Accommodation",
+      "description": "Hostel map and hostel structure",
+      "preconditions": "Logged in",
+      "steps": "1. Open Hostel Map  2. Check blocks, mess, gates, service points  3. Check hostel occupancy  4. Call without login",
+      "data": "-",
+      "expected": "All location types shown; hostels list blocks and occupancy; unauthenticated -> 401",
+      "requirements": "FR20, FR06, FR07",
+      "status": "Pass",
+      "actual": "API: Map returns 12 locations (BLOCK, GATE, MESS, SERVICE); 4 hostels with blocks and live occupancy; unauthenticated -> 401",
+      "automated_by": [
+        "API (pytest)"
+      ],
+      "linked_tests": [
+        "tests/test_community_admin.py::test_ft43_hostel_map_and_structure"
+      ],
+      "defects": "",
+      "execution": "Executed (automated)"
+    }
+  ],
+  "nonfunctional_cases": [
+    {
+      "id": "NFT-01",
+      "attribute": "Performance",
+      "description": "API response time under normal load",
+      "criteria": "Average response < 3 s; errors < 0.5 %",
+      "steps": "k6: 50 virtual users, 60 s + ramp, mixed read/write, 1 s think time",
+      "expected": "Average well below 3 s, no errors",
+      "target_source": "PDF NFR02",
+      "requirements": "NFR02",
+      "status": "Pass",
+      "actual": "50 users, 9,966 requests, 129.33 req/s, failed 0.00 %, avg 54 ms, p95 92 ms, max 261 ms",
+      "evidence": "k6-normal-50vus.json",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-02",
+      "attribute": "Performance",
+      "description": "300 concurrent users (peak hostel hours)",
+      "criteria": "300 VUs: errors < 0.5 % and average < 3 s",
+      "steps": "k6: 300 virtual users, 60 s + ramp",
+      "expected": "System stays responsive with no failed requests",
+      "target_source": "PDF NFR01 + NFR02",
+      "requirements": "NFR01",
+      "status": "Pass",
+      "actual": "300 users, 12,713 requests, 162.14 req/s, failed 0.00 %, avg 1363 ms, p95 1921 ms, max 3021 ms (after fix of DEF-03; first run: 0.82 % failed, p99 32 s)",
+      "evidence": "k6-peak-300vus.json",
+      "defects": "DEF-03 (fixed)",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-03",
+      "attribute": "Performance",
+      "description": "Page load time of key pages",
+      "criteria": "Content visible < 3 s",
+      "steps": "Playwright: dashboard, complaints, notices, deliveries, 3 loads each",
+      "expected": "Every page < 3 s",
+      "target_source": "Project target",
+      "requirements": "NFR02",
+      "status": "Pass",
+      "actual": "UI: Avg time until content visible (3 loads each, local server): / 175 ms, /complaints 143 ms, /notices 133 ms, /delivery 146 ms; worst 175 ms",
+      "evidence": "playwright-results.json",
+      "defects": "",
+      "linked_tests": [
+        "[chromium-desktop] nonfunctional.spec.ts › NFT-03 page load time of key pages is under 3 seconds"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-04",
+      "attribute": "Emergency response",
+      "description": "SOS reaches wardens/security quickly under load",
+      "criteria": "Alert visible to warden < 5 s",
+      "steps": "20 SOS alerts during a 150-user k6 load; poll warden SOS board",
+      "expected": "Every alert < 5 s",
+      "target_source": "PDF NFR03",
+      "requirements": "NFR03",
+      "status": "Pass",
+      "actual": "20 SOS alerts raised during a 150 virtual users (k6) load: server-side notify delay max 114.5 ms; alert visible on warden board avg 1295.0 ms, p95 1942.1 ms, max 2065.1 ms",
+      "evidence": "nft-results.json",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-05",
+      "attribute": "Performance",
+      "description": "Dashboard and database query time with large data",
+      "criteria": "Average < 3 s per endpoint",
+      "steps": "Insert 20k complaints, 5k deliveries, 20k notifications; time 6 endpoints x10",
+      "expected": "All endpoints < 3 s",
+      "target_source": "Project target",
+      "requirements": "NFR02, NFR04",
+      "status": "Pass",
+      "actual": "With +20,000 complaints, +5,000 deliveries, +20,000 notifications: warden dashboard avg 34.1 ms; admin reports avg 93.6 ms; complaint search avg 65.6 ms; complaint page 500 avg 62.8 ms; student notifications avg 13.6 ms; all deliveries avg 345.3 ms. Slowest average 345.3 ms",
+      "evidence": "nft-results.json",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-06",
+      "attribute": "Scalability",
+      "description": "Performance degradation as load increases",
+      "criteria": "p95 at 300 users <= 2 x p95 at 50 users",
+      "steps": "Compare k6 runs at 50, 150 and 300 users",
+      "expected": "No significant degradation",
+      "target_source": "PDF NFR01 wording",
+      "requirements": "NFR01, NFR04",
+      "status": "Fail",
+      "actual": "p95: 92 ms (50 users) → 781 ms (150) → 1921 ms (300) = 20.8x; throughput 129.33 → 167.1 → 162.14 req/s. CPU-bound on a 2-vCPU host shared with PostgreSQL and the load generator",
+      "evidence": "k6-*.json",
+      "defects": "DEF-05",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-07",
+      "attribute": "Security",
+      "description": "Authentication required on every protected endpoint",
+      "criteria": "100 % of protected routes return 401 without token",
+      "steps": "pytest: call every API route/method without a token",
+      "expected": "All 401",
+      "target_source": "Project target",
+      "requirements": "NFR05",
+      "status": "Pass",
+      "actual": "API: 0 protected endpoint/method pairs called without a token: all returned 401",
+      "evidence": "pytest-results.json",
+      "defects": "",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft07_authentication_enforced"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-08",
+      "attribute": "Security",
+      "description": "Role-based authorisation matrix",
+      "criteria": "Every cross-role operation returns 403",
+      "steps": "pytest: 16 operations by student, staff, warden, admin",
+      "expected": "All 403",
+      "target_source": "PDF NFR05",
+      "requirements": "NFR05",
+      "status": "Pass",
+      "actual": "API: 16 cross-role operations (student, staff, warden, admin) all denied with 403 by the backend",
+      "evidence": "pytest-results.json",
+      "defects": "",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft08_role_permission_matrix"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-09",
+      "attribute": "Security",
+      "description": "SQL injection resistance",
+      "criteria": "No auth bypass, no 500 errors, data intact",
+      "steps": "pytest: 5 payloads x login + 3 search inputs",
+      "expected": "Login 401; searches safe",
+      "target_source": "Project target",
+      "requirements": "NFR05",
+      "status": "Pass",
+      "actual": "API: 5 injection payloads x 4 inputs (20 requests): login always 401, searches 200 with no extra rows, 0 server errors, users table intact",
+      "evidence": "pytest-results.json",
+      "defects": "",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft09_sql_injection"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-10",
+      "attribute": "Security",
+      "description": "Cross-site scripting (stored XSS)",
+      "criteria": "No script executes; text shown literally; CSP present",
+      "steps": "Playwright: save <img onerror> and <script> payloads, view as student and warden",
+      "expected": "0 dialogs, 0 injected elements",
+      "target_source": "Project target",
+      "requirements": "NFR05",
+      "status": "Pass",
+      "actual": "UI: Payloads shown literally to student and warden; JavaScript dialogs triggered: 0; injected <img> elements: 0; CSP header: present (script-src 'self')",
+      "evidence": "playwright-results.json",
+      "defects": "DEF-07 (fixed)",
+      "linked_tests": [
+        "[chromium-desktop] nonfunctional.spec.ts › NFT-10 stored XSS payloads are rendered as text, not executed"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-11",
+      "attribute": "Security",
+      "description": "Session / token handling",
+      "criteria": "Tampered, expired, forged and alg=none tokens rejected",
+      "steps": "pytest with crafted JWTs; check expiry window",
+      "expected": "All 401",
+      "target_source": "Project target",
+      "requirements": "NFR05",
+      "status": "Pass",
+      "actual": "API: Tampered, expired, wrong-key and alg=none tokens all 401; tokens expire after 120 min; logout revocation covered in FT-41",
+      "evidence": "pytest-results.json",
+      "defects": "",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft11_token_handling"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-12",
+      "attribute": "Security",
+      "description": "Protection of sensitive information",
+      "criteria": "No hashes in responses; passwords/OTPs bcrypt-hashed",
+      "steps": "pytest: scan API responses; inspect stored hashes",
+      "expected": "No leaks",
+      "target_source": "PDF NFR06 (partial)",
+      "requirements": "NFR06",
+      "status": "Pass",
+      "actual": "API: No password/OTP hashes in any API response; 69 passwords bcrypt-hashed; 7 OTPs stored as bcrypt hashes; OTP/QR secret shown only to the receiver (FT-24)",
+      "evidence": "pytest-results.json",
+      "defects": "",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft12_sensitive_data_protection"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-13",
+      "attribute": "Security",
+      "description": "Brute-force protection",
+      "criteria": "Account locked after 5 failed logins",
+      "steps": "pytest: 6 wrong passwords then correct password",
+      "expected": "6th attempt -> 429",
+      "target_source": "Project target",
+      "requirements": "NFR05",
+      "status": "Pass",
+      "actual": "API: 5 wrong passwords -> 401 each; 6th attempt -> 429; correct password while locked -> 429 'Too many failed attempts. Try again in 15 minutes.'",
+      "evidence": "pytest-results.json",
+      "defects": "",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft13_brute_force_lockout"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-14",
+      "attribute": "Security",
+      "description": "File upload validation",
+      "criteria": "Executables, fake PDFs, SVG, empty files rejected",
+      "steps": "pytest: upload malicious / invalid files",
+      "expected": "415 / 422 / 413",
+      "target_source": "Project target",
+      "requirements": "NFR05",
+      "status": "Pass",
+      "actual": "API: Uploads rejected: exe as octet-stream -> 415; html renamed pdf -> 415; empty file -> 422; svg image -> 415; size limit 2 MB -> 413 (FT-35)",
+      "evidence": "pytest-results.json",
+      "defects": "",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft14_upload_validation"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-15",
+      "attribute": "Accessibility",
+      "description": "Automated WCAG 2.1 A/AA scan",
+      "criteria": "0 serious or critical violations",
+      "steps": "Playwright + axe-core on 7 pages",
+      "expected": "No serious issues",
+      "target_source": "Project target",
+      "requirements": "NFR10",
+      "status": "Pass",
+      "actual": "UI: 7 pages scanned. /login: 0 serious/critical rule(s); /: 0 serious/critical rule(s); /complaints: 0 serious/critical rule(s); /visitors: 0 serious/critical rule(s); /delivery: 0 serious/critical rule(s); /sos: 0 serious/critical rule(s); /profile: 0 serious/critical rule(s). Total serious/critical nodes: 0",
+      "evidence": "playwright-results.json",
+      "defects": "",
+      "linked_tests": [
+        "[chromium-desktop] nonfunctional.spec.ts › NFT-15 automated accessibility scan (axe-core, WCAG 2.1 A/AA)"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-16",
+      "attribute": "Usability",
+      "description": "Keyboard-only navigation",
+      "criteria": "Login and complaint form usable without a mouse",
+      "steps": "Playwright: Tab / Enter / Escape only",
+      "expected": "All steps work; skip link first",
+      "target_source": "Project target",
+      "requirements": "NFR10",
+      "status": "Pass",
+      "actual": "UI: Login completed with Tab/typing/Enter only; complaint dialog opened with Enter, focus moved into the form, Escape closed it; 'Skip to content' link is first in tab order",
+      "evidence": "playwright-results.json",
+      "defects": "DEF-07 (fixed)",
+      "linked_tests": [
+        "[chromium-desktop] nonfunctional.spec.ts › NFT-16 keyboard-only navigation for login and complaint form"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-17",
+      "attribute": "Usability",
+      "description": "Form validation feedback",
+      "criteria": "Errors shown inline, announced (role=alert), linked to fields",
+      "steps": "Playwright: submit empty registration form",
+      "expected": ">= 5 linked inline errors",
+      "target_source": "Project target",
+      "requirements": "NFR10",
+      "status": "Pass",
+      "actual": "UI: Empty registration submit: 6 inline errors with role=alert; inputs marked aria-invalid and linked via aria-describedby",
+      "evidence": "playwright-results.json",
+      "defects": "DEF-07 (fixed)",
+      "linked_tests": [
+        "[chromium-desktop] nonfunctional.spec.ts › NFT-17 form errors are announced and linked to their fields"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-18",
+      "attribute": "Usability",
+      "description": "Responsive layout",
+      "criteria": "No horizontal scrolling at 375, 768, 1366 px",
+      "steps": "Playwright: 8 pages x 3 widths",
+      "expected": "No overflow",
+      "target_source": "Project target",
+      "requirements": "NFR11",
+      "status": "Pass",
+      "actual": "UI: 8 pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: none",
+      "evidence": "playwright-results.json",
+      "defects": "DEF-02 (fixed)",
+      "linked_tests": [
+        "[chromium-desktop] nonfunctional.spec.ts › NFT-18 responsive layout has no horizontal scrolling"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-19",
+      "attribute": "Usability",
+      "description": "New user completes key tasks within 15 minutes",
+      "criteria": "Task time with real first-time users",
+      "steps": "Moderated usability session with 5 new students",
+      "expected": "Key tasks < 15 min",
+      "target_source": "PDF NFR10",
+      "requirements": "NFR10",
+      "status": "Not Run",
+      "actual": "Not executed: Needs a moderated session with real first-time users; automated scripts cannot measure human learning time.",
+      "evidence": "",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Not executed"
+    },
+    {
+      "id": "NFT-20",
+      "attribute": "Reliability",
+      "description": "Error handling",
+      "criteria": "Correct 404/405/422 JSON errors, no stack traces",
+      "steps": "pytest: missing record, malformed JSON, bad types, unknown route",
+      "expected": "Clean JSON errors",
+      "target_source": "Project target",
+      "requirements": "NFR08",
+      "status": "Pass",
+      "actual": "API: missing record -> 404; malformed JSON -> 422; bad query type -> 422; unknown route -> 404; wrong method -> 405; JSON error bodies, no stack traces; /api/health reports DB status",
+      "evidence": "pytest-results.json",
+      "defects": "",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft20_error_handling"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-21",
+      "attribute": "Data integrity",
+      "description": "Duplicate submissions and race conditions",
+      "criteria": "1 record for 5 parallel identical submits; 1 carrier wins",
+      "steps": "pytest: 5 parallel complaint POSTs; 4 parallel carrier accepts",
+      "expected": "No duplicates",
+      "target_source": "PDF NFR13",
+      "requirements": "NFR13",
+      "status": "Pass",
+      "actual": "API: 5 parallel identical complaint submissions -> codes [201, 409, 409, 409, 409], 1 stored; 4 parallel carrier accepts -> codes [200, 409, 409, 409], carrier recorded once",
+      "evidence": "pytest-results.json",
+      "defects": "DEF-01 (fixed)",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft21_duplicate_and_race_conditions"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-22",
+      "attribute": "Reliability",
+      "description": "Persistence after server restart",
+      "criteria": "Record readable after restart",
+      "steps": "Create complaint, restart API process, read it back",
+      "expected": "Identical data",
+      "target_source": "PDF NFR13",
+      "requirements": "NFR13",
+      "status": "Pass",
+      "actual": "Complaint CMP-00258 created, API server stopped and restarted, record read back with HTTP 200 and identical data",
+      "evidence": "nft-results.json",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-23",
+      "attribute": "Auditability",
+      "description": "Audit trail and status consistency",
+      "criteria": "All critical actions logged with user + timestamp",
+      "steps": "pytest: perform approvals, SOS, deliveries; inspect audit_logs",
+      "expected": "All present",
+      "target_source": "PDF NFR12",
+      "requirements": "NFR12",
+      "status": "Pass",
+      "actual": "API: Complaint statuses ['CLOSED', 'ESCALATED', 'IN_PROGRESS', 'OPEN', 'RESOLVED'] all valid with matching timestamps; all 10 critical actions present in the audit log with user ID and timestamp",
+      "evidence": "pytest-results.json",
+      "defects": "DEF-07 (fixed)",
+      "linked_tests": [
+        "tests/test_nonfunctional_security.py::test_nft23_audit_and_status_consistency"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-24",
+      "attribute": "Backup & recovery",
+      "description": "Backup and restore",
+      "criteria": "Restore < 2 h with identical row counts",
+      "steps": "pg_dump of loaded DB, pg_restore into new DB, compare 8 tables",
+      "expected": "Counts identical",
+      "target_source": "PDF NFR09",
+      "requirements": "NFR09",
+      "status": "Pass",
+      "actual": "pg_dump 0.8 MB in 0.2 s; restore into a new database in 0.4 s (target < 2 h); row counts of 8 tables identical (e.g. complaints 20,258). Daily scheduling is a deployment task (scripts/backup_db.sh + cron) and was not run here",
+      "evidence": "scripts/backup_db.sh, scripts/restore_db.sh",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-25",
+      "attribute": "Reliability",
+      "description": "Error rate across all load tests",
+      "criteria": "< 0.5 % failed requests",
+      "steps": "Aggregate of the k6 runs at 50, 150 and 300 users",
+      "expected": "< 0.5 %",
+      "target_source": "PDF NFR08",
+      "requirements": "NFR08",
+      "status": "Pass",
+      "actual": "0 failed of 35,598 requests across 3 load runs = 0.000 %",
+      "evidence": "k6-*.json",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-26",
+      "attribute": "Compatibility",
+      "description": "Chromium desktop browser",
+      "criteria": "All E2E tests pass",
+      "steps": "Playwright Chromium 141 at 1366x850",
+      "expected": "All pass",
+      "target_source": "PDF NFR11",
+      "requirements": "NFR11",
+      "status": "Pass",
+      "actual": "Chromium 141.0.7390.37: 21/21 desktop E2E tests passed",
+      "evidence": "playwright-results.json",
+      "defects": "",
+      "linked_tests": [
+        "[chromium-desktop] smoke.spec.ts › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-27",
+      "attribute": "Compatibility",
+      "description": "Firefox desktop browser",
+      "criteria": "Smoke test passes",
+      "steps": "Playwright Firefox project (ALL_BROWSERS=1)",
+      "expected": "Pass",
+      "target_source": "PDF NFR11",
+      "requirements": "NFR11",
+      "status": "Blocked",
+      "actual": "Not executed – firefox-desktop: Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox",
+      "evidence": "playwright-results.json",
+      "defects": "DEF-06",
+      "linked_tests": [
+        "[firefox-desktop] smoke.spec.ts › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list"
+      ],
+      "execution": "Not executed"
+    },
+    {
+      "id": "NFT-28",
+      "attribute": "Compatibility",
+      "description": "Safari / WebKit browser",
+      "criteria": "Smoke test passes",
+      "steps": "Playwright WebKit project (ALL_BROWSERS=1)",
+      "expected": "Pass",
+      "target_source": "PDF NFR11",
+      "requirements": "NFR11",
+      "status": "Blocked",
+      "actual": "Not executed – webkit-desktop: Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/webkit-2215/pw_run.sh",
+      "evidence": "playwright-results.json",
+      "defects": "DEF-06",
+      "linked_tests": [
+        "[webkit-desktop] smoke.spec.ts › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list"
+      ],
+      "execution": "Not executed"
+    },
+    {
+      "id": "NFT-29",
+      "attribute": "Compatibility",
+      "description": "Mobile viewports",
+      "criteria": "Login, menu, SOS and forms work on phone screens",
+      "steps": "Playwright Chromium emulating Pixel 5 and iPhone 12",
+      "expected": "Pass, no overflow",
+      "target_source": "PDF NFR11",
+      "requirements": "NFR11",
+      "status": "Pass",
+      "actual": "UI: mobile-pixel5 (393x727, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow\nUI: mobile-iphone12-chromium (390x664, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow",
+      "evidence": "playwright-results.json",
+      "defects": "",
+      "linked_tests": [
+        "[mobile-pixel5] mobile.spec.ts › NFT-29 mobile viewport: login, menu, SOS button and complaint form work",
+        "[mobile-iphone12-chromium] mobile.spec.ts › NFT-29 mobile viewport: login, menu, SOS button and complaint form work"
+      ],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-30",
+      "attribute": "Maintainability",
+      "description": "Linting and type checking",
+      "criteria": "0 lint errors, 0 type errors",
+      "steps": "ESLint, TypeScript strict, Ruff",
+      "expected": "Clean",
+      "target_source": "Project target",
+      "requirements": "NFR14",
+      "status": "Pass",
+      "actual": "ESLint: 0 errors, 0 warnings in 46 files; TypeScript strict: 0 errors; Ruff (Python): 0 issues",
+      "evidence": "eslint.config.js, tsconfig.json, backend/ruff.toml",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-31",
+      "attribute": "Maintainability",
+      "description": "Production build",
+      "criteria": "Build succeeds",
+      "steps": "npm run build (Vite)",
+      "expected": "Success",
+      "target_source": "Project target",
+      "requirements": "NFR14",
+      "status": "Pass",
+      "actual": "Production build succeeded in 8.5 s; JavaScript bundle 341 KB (uncompressed)",
+      "evidence": "frontend/dist",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-32",
+      "attribute": "Portability",
+      "description": "Reproducible setup from scratch",
+      "criteria": "Fresh DB initialises; all env vars documented",
+      "steps": "Create empty DB, run seed, start API, check .env.example",
+      "expected": "Healthy app",
+      "target_source": "Project target",
+      "requirements": "NFR14",
+      "status": "Pass",
+      "actual": "Empty database initialised and seeded in 1.6 s (26 tables, 65 users); API health OK on the fresh DB; .env.example covers 15/15 variables read by the code",
+      "evidence": "backend/app/seed.py, .env.example, Dockerfile",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Executed"
+    },
+    {
+      "id": "NFT-33",
+      "attribute": "Availability",
+      "description": "Monthly uptime",
+      "criteria": ">= 99.5 % per month",
+      "steps": "External uptime monitor on /api/health for 30 days",
+      "expected": ">= 99.5 %",
+      "target_source": "PDF NFR07",
+      "requirements": "NFR07",
+      "status": "Not Run",
+      "actual": "Not executed: Needs a public deployment monitored for 30 days; the app exposes /api/health for an uptime monitor.",
+      "evidence": "",
+      "defects": "",
+      "linked_tests": [],
+      "execution": "Not executed"
+    },
+    {
+      "id": "NFT-34",
+      "attribute": "Data privacy",
+      "description": "Personal data encrypted in transit and at rest",
+      "criteria": "PII not readable in database; HTTPS",
+      "steps": "Inspect stored student/visitor data; check DB TLS",
+      "expected": "Encrypted",
+      "target_source": "PDF NFR06",
+      "requirements": "NFR06",
+      "status": "Fail",
+      "actual": "Passwords and OTPs are hashed, but student phone numbers, registration numbers and visitor phone numbers are stored as plain text (e.g. phone '984*******'); local PostgreSQL ssl=off. Encryption in transit relies on HTTPS at the hosting provider (HSTS header is sent in production) and could not be verified locally. NFR06 (encrypted at rest) is NOT met by the application",
+      "evidence": "Defect DEF-04",
+      "defects": "DEF-04",
+      "linked_tests": [],
+      "execution": "Executed"
+    }
+  ],
+  "k6_runs": {
+    "background-sos": {
+      "label": "background-sos",
+      "vus": 150,
+      "duration": "40s",
+      "requests": 9279,
+      "throughput_rps": 162.14,
+      "http_req_failed_rate": 0,
+      "business_error_rate": 0,
+      "latency_ms": {
+        "avg": 501.2443067110678,
+        "min": 8.15367,
+        "med": 531.563099,
+        "p(90)": 725.8884988000002,
+        "p(95)": 812.5838023000001,
+        "p(99)": 1037.15739984,
+        "max": 1410.195369
+      },
+      "read_latency_ms": {
+        "max": 1314.130525,
+        "avg": 493.28437150609784,
+        "min": 8.15367,
+        "med": 527.894479,
+        "p(90)": 710.2948607,
+        "p(95)": 775.01496355,
+        "p(99)": 936.02444297
+      },
+      "write_latency_ms": {
+        "max": 1410.195369,
+        "avg": 801.5446752879999,
+        "min": 16.951237,
+        "med": 865.001274,
+        "p(90)": 1164.7303854999998,
+        "p(95)": 1274.5906806499993,
+        "p(99)": 1386.21278724
+      },
+      "checks_passed": 9270,
+      "checks_failed": 0,
+      "thresholds_ok": {
+        "http_req_duration": true,
+        "vista_errors": true
+      }
+    },
+    "normal-50vus": {
+      "label": "normal-50vus",
+      "vus": 50,
+      "duration": "60s",
+      "requests": 9966,
+      "throughput_rps": 129.33,
+      "http_req_failed_rate": 0,
+      "business_error_rate": 0,
+      "latency_ms": {
+        "p(99)": 119.861673,
+        "max": 260.557667,
+        "avg": 54.13895354525371,
+        "min": 6.610968,
+        "med": 55.779453000000004,
+        "p(90)": 79.899553,
+        "p(95)": 92.22669725
+      },
+      "read_latency_ms": {
+        "avg": 54.23253191959839,
+        "min": 6.610968,
+        "med": 55.808912500000005,
+        "p(90)": 79.8767325,
+        "p(95)": 91.9214063,
+        "p(99)": 116.06182487000004,
+        "max": 260.557667
+      },
+      "write_latency_ms": {
+        "p(95)": 103.690215,
+        "p(99)": 141.75824123999993,
+        "max": 172.50725,
+        "avg": 48.41125274061428,
+        "min": 15.361371,
+        "med": 41.944874,
+        "p(90)": 78.85771360000001
+      },
+      "checks_passed": 9957,
+      "checks_failed": 0,
+      "thresholds_ok": {
+        "http_req_duration": true,
+        "vista_errors": true
+      }
+    },
+    "peak-150vus": {
+      "label": "peak-150vus",
+      "vus": 150,
+      "duration": "60s",
+      "requests": 12919,
+      "throughput_rps": 167.1,
+      "http_req_failed_rate": 0,
+      "business_error_rate": 0,
+      "latency_ms": {
+        "avg": 508.6313638838938,
+        "min": 7.769988,
+        "med": 526.274146,
+        "p(90)": 714.1094936000002,
+        "p(95)": 781.4439002999995,
+        "p(99)": 986.74681276,
+        "max": 1974.971809
+      },
+      "read_latency_ms": {
+        "max": 1122.645287,
+        "avg": 498.29644758945363,
+        "min": 7.769988,
+        "med": 521.9538689999999,
+        "p(90)": 699.7840941,
+        "p(95)": 754.4051441499998,
+        "p(99)": 857.77155296
+      },
+      "write_latency_ms": {
+        "med": 862.9882605,
+        "p(90)": 1238.0854181,
+        "p(95)": 1338.2684772499997,
+        "p(99)": 1709.3383072600013,
+        "max": 1974.971809,
+        "avg": 860.1312695529103,
+        "min": 18.369832
+      },
+      "checks_passed": 12910,
+      "checks_failed": 0,
+      "thresholds_ok": {
+        "vista_errors": true,
+        "http_req_duration": true
+      }
+    },
+    "peak-300vus": {
+      "label": "peak-300vus",
+      "vus": 300,
+      "duration": "60s",
+      "requests": 12713,
+      "throughput_rps": 162.14,
+      "http_req_failed_rate": 0,
+      "business_error_rate": 0,
+      "latency_ms": {
+        "avg": 1362.799312881695,
+        "min": 8.10292,
+        "med": 1429.454982,
+        "p(90)": 1779.7183528,
+        "p(95)": 1921.4983025999998,
+        "p(99)": 2208.929238439999,
+        "max": 3020.974618
+      },
+      "read_latency_ms": {
+        "max": 2738.824442,
+        "avg": 1348.6728550317393,
+        "min": 8.10292,
+        "med": 1423.520346,
+        "p(90)": 1743.792397,
+        "p(95)": 1862.2402484,
+        "p(99)": 2122.452202299999
+      },
+      "write_latency_ms": {
+        "max": 3020.974618,
+        "avg": 1843.5103956961027,
+        "min": 16.828382,
+        "med": 1924.04999,
+        "p(90)": 2317.4708338,
+        "p(95)": 2484.3339283999994,
+        "p(99)": 2756.4668499599993
+      },
+      "checks_passed": 12704,
+      "checks_failed": 0,
+      "thresholds_ok": {
+        "vista_errors": true,
+        "http_req_duration": true
+      }
+    }
+  },
+  "automated_tests": [
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft01_valid_login",
+      "cases": [
+        "FT-01"
+      ],
+      "status": "passed",
+      "duration_s": 0.094,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft02_invalid_login",
+      "cases": [
+        "FT-02"
+      ],
+      "status": "passed",
+      "duration_s": 0.08,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft03_role_based_dashboard",
+      "cases": [
+        "FT-03"
+      ],
+      "status": "passed",
+      "duration_s": 0.312,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft04_student_blocked_from_admin",
+      "cases": [
+        "FT-04"
+      ],
+      "status": "passed",
+      "duration_s": 0.017,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft05_student_registration",
+      "cases": [
+        "FT-05"
+      ],
+      "status": "passed",
+      "duration_s": 0.164,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft06_registration_validation[reg_no-ABC123]",
+      "cases": [
+        "FT-06"
+      ],
+      "status": "passed",
+      "duration_s": 0.003,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft06_registration_validation[phone-12345]",
+      "cases": [
+        "FT-06"
+      ],
+      "status": "passed",
+      "duration_s": 0.002,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft06_registration_validation[password-short]",
+      "cases": [
+        "FT-06"
+      ],
+      "status": "passed",
+      "duration_s": 0.002,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft06_registration_validation[email-not-an-email]",
+      "cases": [
+        "FT-06"
+      ],
+      "status": "passed",
+      "duration_s": 0.002,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft06_registration_validation[full_name-<script>]",
+      "cases": [
+        "FT-06"
+      ],
+      "status": "passed",
+      "duration_s": 0.002,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft07_profile_update_persists",
+      "cases": [
+        "FT-07"
+      ],
+      "status": "passed",
+      "duration_s": 0.107,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft31_unauthorized_admin_actions",
+      "cases": [
+        "FT-31"
+      ],
+      "status": "passed",
+      "duration_s": 0.165,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_auth.py::test_ft41_logout_revokes_token",
+      "cases": [
+        "FT-41"
+      ],
+      "status": "passed",
+      "duration_s": 0.167,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft30_notice_publish_and_display",
+      "cases": [
+        "FT-30"
+      ],
+      "status": "passed",
+      "duration_s": 0.276,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft33_lost_and_found",
+      "cases": [
+        "FT-33"
+      ],
+      "status": "passed",
+      "duration_s": 0.116,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft34_marketplace",
+      "cases": [
+        "FT-34"
+      ],
+      "status": "passed",
+      "duration_s": 0.125,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft35_notes_and_vault",
+      "cases": [
+        "FT-35"
+      ],
+      "status": "passed",
+      "duration_s": 0.07,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft36_mess_feedback",
+      "cases": [
+        "FT-36"
+      ],
+      "status": "passed",
+      "duration_s": 0.195,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft37_roommate_finder",
+      "cases": [
+        "FT-37"
+      ],
+      "status": "passed",
+      "duration_s": 0.083,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft38_room_allocation_rules",
+      "cases": [
+        "FT-38"
+      ],
+      "status": "passed",
+      "duration_s": 0.154,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft39_reports_match_database",
+      "cases": [
+        "FT-39"
+      ],
+      "status": "passed",
+      "duration_s": 0.086,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft40_in_app_messaging",
+      "cases": [
+        "FT-40"
+      ],
+      "status": "passed",
+      "duration_s": 0.04,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft42_admin_registers_staff_warden_admin",
+      "cases": [
+        "FT-42"
+      ],
+      "status": "passed",
+      "duration_s": 0.497,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_community_admin.py::test_ft43_hostel_map_and_structure",
+      "cases": [
+        "FT-43"
+      ],
+      "status": "passed",
+      "duration_s": 0.066,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_complaints.py::test_ft08_register_complaint_forwarded",
+      "cases": [
+        "FT-08"
+      ],
+      "status": "passed",
+      "duration_s": 0.027,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_complaints.py::test_ft09_complaint_missing_fields",
+      "cases": [
+        "FT-09"
+      ],
+      "status": "passed",
+      "duration_s": 0.014,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_complaints.py::test_ft10_washroom_water_high_priority",
+      "cases": [
+        "FT-10"
+      ],
+      "status": "passed",
+      "duration_s": 0.033,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_complaints.py::test_ft11_staff_updates_status",
+      "cases": [
+        "FT-11"
+      ],
+      "status": "passed",
+      "duration_s": 0.051,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_complaints.py::test_ft12_invalid_complaint_transitions",
+      "cases": [
+        "FT-12"
+      ],
+      "status": "passed",
+      "duration_s": 0.057,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_complaints.py::test_ft13_escalation_rule",
+      "cases": [
+        "FT-13"
+      ],
+      "status": "passed",
+      "duration_s": 0.13,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_delivery.py::test_ft22_create_delivery_request",
+      "cases": [
+        "FT-22"
+      ],
+      "status": "passed",
+      "duration_s": 0.038,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_delivery.py::test_ft23_carrier_acceptance",
+      "cases": [
+        "FT-23"
+      ],
+      "status": "passed",
+      "duration_s": 0.058,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_delivery.py::test_ft24_valid_otp_completes_delivery",
+      "cases": [
+        "FT-24"
+      ],
+      "status": "passed",
+      "duration_s": 0.095,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_delivery.py::test_ft25_invalid_otp",
+      "cases": [
+        "FT-25"
+      ],
+      "status": "passed",
+      "duration_s": 0.082,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_delivery.py::test_ft26_otp_lockout_and_expiry",
+      "cases": [
+        "FT-26"
+      ],
+      "status": "passed",
+      "duration_s": 0.232,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_delivery.py::test_ft27_invalid_delivery_transitions",
+      "cases": [
+        "FT-27"
+      ],
+      "status": "passed",
+      "duration_s": 0.053,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_delivery.py::test_ft28_qr_photo_verification",
+      "cases": [
+        "FT-28"
+      ],
+      "status": "passed",
+      "duration_s": 0.111,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_delivery.py::test_ft29_gate_parcel_reservation",
+      "cases": [
+        "FT-29"
+      ],
+      "status": "passed",
+      "duration_s": 0.074,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft07_authentication_enforced",
+      "cases": [
+        "NFT-07"
+      ],
+      "status": "passed",
+      "duration_s": 0.0,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft08_role_permission_matrix",
+      "cases": [
+        "NFT-08"
+      ],
+      "status": "passed",
+      "duration_s": 0.067,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft09_sql_injection",
+      "cases": [
+        "NFT-09"
+      ],
+      "status": "passed",
+      "duration_s": 0.122,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft11_token_handling",
+      "cases": [
+        "NFT-11"
+      ],
+      "status": "passed",
+      "duration_s": 0.088,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft12_sensitive_data_protection",
+      "cases": [
+        "NFT-12"
+      ],
+      "status": "passed",
+      "duration_s": 0.217,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft13_brute_force_lockout",
+      "cases": [
+        "NFT-13"
+      ],
+      "status": "passed",
+      "duration_s": 0.383,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft14_upload_validation",
+      "cases": [
+        "NFT-14"
+      ],
+      "status": "passed",
+      "duration_s": 0.018,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft20_error_handling",
+      "cases": [
+        "NFT-20"
+      ],
+      "status": "passed",
+      "duration_s": 0.014,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft21_duplicate_and_race_conditions",
+      "cases": [
+        "NFT-21"
+      ],
+      "status": "passed",
+      "duration_s": 0.086,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_nonfunctional_security.py::test_nft23_audit_and_status_consistency",
+      "cases": [
+        "NFT-23"
+      ],
+      "status": "passed",
+      "duration_s": 0.082,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft14_visitor_registration",
+      "cases": [
+        "FT-14"
+      ],
+      "status": "passed",
+      "duration_s": 0.019,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft15_warden_approves",
+      "cases": [
+        "FT-15"
+      ],
+      "status": "passed",
+      "duration_s": 0.032,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft16_warden_rejects",
+      "cases": [
+        "FT-16"
+      ],
+      "status": "passed",
+      "duration_s": 0.098,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[past date-data0-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "status": "passed",
+      "duration_s": 0.004,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[more than 30 days ahead-data1-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "status": "passed",
+      "duration_s": 0.004,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[malformed date-data2-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "status": "passed",
+      "duration_s": 0.004,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[end before start-data3-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "status": "passed",
+      "duration_s": 0.004,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[outside visiting hours-data4-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "status": "passed",
+      "duration_s": 0.004,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[missing phone-data5-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "status": "passed",
+      "duration_s": 0.005,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft18_sick_meal_request",
+      "cases": [
+        "FT-18"
+      ],
+      "status": "passed",
+      "duration_s": 0.153,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft19_room_cleaning_request",
+      "cases": [
+        "FT-19"
+      ],
+      "status": "passed",
+      "duration_s": 0.036,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft20_sos_raise_ack_resolve",
+      "cases": [
+        "FT-20"
+      ],
+      "status": "passed",
+      "duration_s": 0.054,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "pytest",
+      "id": "tests/test_visitors_services_sos.py::test_ft21_sos_requires_confirmation_and_role",
+      "cases": [
+        "FT-21"
+      ],
+      "status": "passed",
+      "duration_s": 0.015,
+      "project": "api",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "ui.test.tsx > UI components renders a status badge with a readable label",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.025,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "ui.test.tsx > UI components links a field error to its input for screen readers",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.01,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "ui.test.tsx > UI components closes a modal with the Escape key",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.02,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "ui.test.tsx > Login page shows validation errors without calling the API",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.111,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "ui.test.tsx > Login page shows the server error for invalid credentials",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.149,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "validation.test.ts > registration validation accepts a valid form",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.002,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "validation.test.ts > registration validation rejects a bad registration number",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.0,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "validation.test.ts > registration validation rejects a mismatched confirmation",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.0,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "validation.test.ts > registration validation rejects an invalid phone",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.0,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "validation.test.ts > registration validation requires letters and digits in passwords",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.0,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "validation.test.ts > visitor validation accepts a valid visitor",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.0,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "validation.test.ts > visitor validation rejects a past date",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.0,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "validation.test.ts > visitor validation rejects an inverted time window",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.0,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "vitest",
+      "id": "validation.test.ts > complaint validation requires category, title and description",
+      "cases": [],
+      "status": "passed",
+      "duration_s": 0.001,
+      "project": "jsdom",
+      "message": "",
+      "actual": ""
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] delivery.spec.ts › FT-22/FT-23/FT-24 P2P delivery end to end with OTP handover",
+      "cases": [
+        "FT-22",
+        "FT-23",
+        "FT-24"
+      ],
+      "status": "passed",
+      "duration_s": 3.59,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: DLV-00002 posted with ₹10 demo fee → accepted & picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-01 valid student login opens the student dashboard",
+      "cases": [
+        "FT-01"
+      ],
+      "status": "passed",
+      "duration_s": 0.7,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: redirected to dashboard 'Good evening, Priya', role label 'Student', SOS button visible"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-02 invalid password shows an error and stays on login",
+      "cases": [
+        "FT-02"
+      ],
+      "status": "passed",
+      "duration_s": 0.66,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: error 'Invalid email or password' displayed; URL stays /login"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-03 navigation is role-specific",
+      "cases": [
+        "FT-03"
+      ],
+      "status": "passed",
+      "duration_s": 1.22,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: student menu shows Document Vault, no Users; warden menu shows Users/Hostels, no Vault; warden dashboard shows Active SOS card"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-04 student opening an admin page gets access denied",
+      "cases": [
+        "FT-04"
+      ],
+      "status": "passed",
+      "duration_s": 0.66,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: /admin/users as student shows '403 Access denied' page"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-06 registration form shows field validation errors",
+      "cases": [
+        "FT-06"
+      ],
+      "status": "passed",
+      "duration_s": 0.56,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: inline errors for reg. no., mobile, password and name; form not submitted"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-41 logout ends the session",
+      "cases": [
+        "FT-41"
+      ],
+      "status": "passed",
+      "duration_s": 1.01,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: logout returns to /login; opening /complaints afterwards redirects to /login"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-07 profile update persists after reload",
+      "cases": [
+        "FT-07"
+      ],
+      "status": "passed",
+      "duration_s": 0.99,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: 'Profile updated' toast; after reload mobile=9988776655, study=QUIET"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-08/FT-32 complaint is created in the UI and persists after reload",
+      "cases": [
+        "FT-08",
+        "FT-32"
+      ],
+      "status": "passed",
+      "duration_s": 1.43,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: CMP-00008 created (status Open, forwarded to maintenance staff) and still listed after page reload"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-09 complaint form blocks missing required fields",
+      "cases": [
+        "FT-09"
+      ],
+      "status": "passed",
+      "duration_s": 0.83,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: three inline errors shown (category, title, description); dialog stays open, nothing submitted"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-14/FT-15 student registers a visitor, warden approves, student sees approval",
+      "cases": [
+        "FT-14",
+        "FT-15"
+      ],
+      "status": "passed",
+      "duration_s": 1.98,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: request shown Pending to student → warden approved with remark → student list shows Approved + 'Please carry ID'"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-17 past visit date is rejected in the form",
+      "cases": [
+        "FT-17"
+      ],
+      "status": "passed",
+      "duration_s": 0.94,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: 'Visit date cannot be in the past' shown; no request created"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-30 warden publishes a notice and students see it",
+      "cases": [
+        "FT-30"
+      ],
+      "status": "passed",
+      "duration_s": 2.35,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: notice published by warden; visible on student's notice board and in student's notifications"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] functional.spec.ts › FT-20 SOS requires confirmation, reaches the warden, is acknowledged and resolved",
+      "cases": [
+        "FT-20"
+      ],
+      "status": "passed",
+      "duration_s": 2.16,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "UI: confirmation dialog with demo disclaimer → alert Raised on warden board → Acknowledged → Resolved; student sees Resolved"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] nonfunctional.spec.ts › NFT-03 page load time of key pages is under 3 seconds",
+      "cases": [
+        "NFT-03"
+      ],
+      "status": "passed",
+      "duration_s": 2.43,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "Avg time until content visible (3 loads each, local server): / 175 ms, /complaints 143 ms, /notices 133 ms, /delivery 146 ms; worst 175 ms"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] nonfunctional.spec.ts › NFT-10 stored XSS payloads are rendered as text, not executed",
+      "cases": [
+        "NFT-10"
+      ],
+      "status": "passed",
+      "duration_s": 2.09,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "Payloads shown literally to student and warden; JavaScript dialogs triggered: 0; injected <img> elements: 0; CSP header: present (script-src 'self')"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] nonfunctional.spec.ts › NFT-15 automated accessibility scan (axe-core, WCAG 2.1 A/AA)",
+      "cases": [
+        "NFT-15"
+      ],
+      "status": "passed",
+      "duration_s": 9.09,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "7 pages scanned. /login: 0 serious/critical rule(s); /: 0 serious/critical rule(s); /complaints: 0 serious/critical rule(s); /visitors: 0 serious/critical rule(s); /delivery: 0 serious/critical rule(s); /sos: 0 serious/critical rule(s); /profile: 0 serious/critical rule(s). Total serious/critical nodes: 0"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] nonfunctional.spec.ts › NFT-16 keyboard-only navigation for login and complaint form",
+      "cases": [
+        "NFT-16"
+      ],
+      "status": "passed",
+      "duration_s": 1.14,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "Login completed with Tab/typing/Enter only; complaint dialog opened with Enter, focus moved into the form, Escape closed it; 'Skip to content' link is first in tab order"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] nonfunctional.spec.ts › NFT-17 form errors are announced and linked to their fields",
+      "cases": [
+        "NFT-17"
+      ],
+      "status": "passed",
+      "duration_s": 0.5,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "Empty registration submit: 6 inline errors with role=alert; inputs marked aria-invalid and linked via aria-describedby"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] nonfunctional.spec.ts › NFT-18 responsive layout has no horizontal scrolling",
+      "cases": [
+        "NFT-18"
+      ],
+      "status": "passed",
+      "duration_s": 17.42,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "8 pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: none"
+    },
+    {
+      "tool": "playwright",
+      "id": "[chromium-desktop] smoke.spec.ts › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list",
+      "cases": [
+        "NFT-26"
+      ],
+      "status": "passed",
+      "duration_s": 1.0,
+      "project": "chromium-desktop",
+      "message": "",
+      "actual": "chromium-desktop: login, dashboard, complaints and deliveries pages rendered and worked"
+    },
+    {
+      "tool": "playwright",
+      "id": "[firefox-desktop] smoke.spec.ts › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list",
+      "cases": [
+        "NFT-27"
+      ],
+      "status": "blocked",
+      "duration_s": 0.0,
+      "project": "firefox-desktop",
+      "message": "Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox",
+      "actual": ""
+    },
+    {
+      "tool": "playwright",
+      "id": "[webkit-desktop] smoke.spec.ts › NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list",
+      "cases": [
+        "NFT-28"
+      ],
+      "status": "blocked",
+      "duration_s": 0.0,
+      "project": "webkit-desktop",
+      "message": "Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/webkit-2215/pw_run.sh",
+      "actual": ""
+    },
+    {
+      "tool": "playwright",
+      "id": "[mobile-pixel5] mobile.spec.ts › NFT-29 mobile viewport: login, menu, SOS button and complaint form work",
+      "cases": [
+        "NFT-29"
+      ],
+      "status": "passed",
+      "duration_s": 1.02,
+      "project": "mobile-pixel5",
+      "message": "",
+      "actual": "mobile-pixel5 (393x727, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+    },
+    {
+      "tool": "playwright",
+      "id": "[mobile-iphone12-chromium] mobile.spec.ts › NFT-29 mobile viewport: login, menu, SOS button and complaint form work",
+      "cases": [
+        "NFT-29"
+      ],
+      "status": "passed",
+      "duration_s": 1.1,
+      "project": "mobile-iphone12-chromium",
+      "message": "",
+      "actual": "mobile-iphone12-chromium (390x664, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+    }
+  ],
+  "defects": [
+    {
+      "id": "DEF-01",
+      "title": "Parallel identical submissions create duplicate complaints",
+      "severity": "High",
+      "type": "Application",
+      "module": "Complaints (also visitors, service requests, SOS, deliveries, mess feedback)",
+      "found_by": "NFT-21 (pytest, first run)",
+      "steps": "Log in as a student; send the same complaint 5 times in parallel (simulated double-click / flaky network).",
+      "expected": "One complaint stored; the other requests get 409 Conflict.",
+      "actual": "All 5 requests returned 201 and 5 identical complaints were stored (check-then-insert race).",
+      "status": "Fixed",
+      "resolution": "Added a per-user PostgreSQL advisory lock (services.lock_for_user) around duplicate checks in every create endpoint. Retest NFT-21: 1 x 201 + 4 x 409, 1 record stored.",
+      "evidence": "test-results/run1-initial/pytest-junit.xml"
+    },
+    {
+      "id": "DEF-02",
+      "title": "Visitors page scrolls sideways on a 375 px phone screen",
+      "severity": "Medium",
+      "type": "Application",
+      "module": "Visitors (UI layout)",
+      "found_by": "NFT-18 (Playwright, first run)",
+      "steps": "Log in as a student on a 375 x 812 viewport and open Visitors.",
+      "expected": "No horizontal scrolling; tables scroll inside their card.",
+      "actual": "Page width 503 px > 375 px viewport; whole page scrolled horizontally.",
+      "status": "Fixed",
+      "resolution": "Cards inside CSS grids now use min-width: 0 so wide tables scroll within the card. Retest NFT-18: no overflow on 8 pages x 3 widths.",
+      "evidence": "test-results/run1-initial/playwright-results.json"
+    },
+    {
+      "id": "DEF-03",
+      "title": "Database connections exhausted at 300 concurrent users",
+      "severity": "High",
+      "type": "Application / configuration",
+      "module": "Backend database layer",
+      "found_by": "NFT-02 (k6, first run)",
+      "steps": "Run k6 with 300 virtual users against the API started with 2 workers.",
+      "expected": "Error rate < 0.5 %, average < 3 s.",
+      "actual": "0.82 % failed requests, p99 32 s. Log: 'remaining connection slots are reserved' and 'QueuePool limit ... timed out' – 2 workers x 50 pooled connections exceeded PostgreSQL max_connections (100).",
+      "status": "Fixed",
+      "resolution": "Pool made configurable (DB_POOL_SIZE / DB_MAX_OVERFLOW / DB_POOL_TIMEOUT) with defaults sized to the 40-thread request pool (35 + 5 per worker). An intermediate setting (10 + 5) caused 7 % pool time-outs and was rejected. Retest at 300 users: 0 % errors, average 1.4 s.",
+      "evidence": "test-results/run1-initial/k6-peak-300vus.json"
+    },
+    {
+      "id": "DEF-04",
+      "title": "Personal data is not encrypted at rest (NFR06)",
+      "severity": "Medium",
+      "type": "Application (requirement gap)",
+      "module": "Data storage",
+      "found_by": "NFT-34",
+      "steps": "Inspect the users and visitor_requests tables in PostgreSQL.",
+      "expected": "Personal data (phone, registration number, visitor details) encrypted in storage.",
+      "actual": "Passwords and OTPs are bcrypt-hashed, but phone numbers, registration numbers and visitor phone numbers are plain text.",
+      "status": "Open",
+      "resolution": "Planned: column-level encryption (pgcrypto or application-side Fernet) for PII, plus a managed database with encryption at rest and TLS (sslmode=require).",
+      "evidence": "test-results/nft-results.json"
+    },
+    {
+      "id": "DEF-05",
+      "title": "Response time grows about 21x from 50 to 300 concurrent users",
+      "severity": "Medium",
+      "type": "Capacity",
+      "module": "Whole system (single 2-vCPU host)",
+      "found_by": "NFT-06 (k6)",
+      "steps": "Run k6 at 50, 150 and 300 users on the same 2-vCPU machine that also runs PostgreSQL and the load generator.",
+      "expected": "No significant degradation (p95 at 300 users <= 2 x p95 at 50 users).",
+      "actual": "p95 92 ms at 50 users vs 1,921 ms at 300 users; throughput levels off at about 162 requests/s (CPU-bound). Still within the 3 s average target.",
+      "status": "Open",
+      "resolution": "Re-test on production-sized hosting; scale horizontally (more workers/instances), cache dashboard counts, move the load generator off the server.",
+      "evidence": "test-results/perf/k6-*.json"
+    },
+    {
+      "id": "DEF-06",
+      "title": "Firefox and WebKit (Safari) could not be tested in this environment",
+      "severity": "Low",
+      "type": "Test environment",
+      "module": "Compatibility testing",
+      "found_by": "NFT-27, NFT-28",
+      "steps": "Run 'ALL_BROWSERS=1 npx playwright test'.",
+      "expected": "Smoke test runs in Firefox and WebKit.",
+      "actual": "browserType.launch: Executable doesn't exist – the sandbox network policy blocks the Playwright browser downloads.",
+      "status": "Open (blocked)",
+      "resolution": "On a normal machine run 'npx playwright install firefox webkit' then 'npm run test:all-browsers' in e2e/.",
+      "evidence": "test-results/playwright-results.json"
+    },
+    {
+      "id": "DEF-07",
+      "title": "Test-script defects found while running the suites",
+      "severity": "Low",
+      "type": "Test script",
+      "module": "Automated tests",
+      "found_by": "First runs: NFT-23 (pytest); FT-06, FT-08, FT-30, NFT-10, NFT-16, NFT-17 (Playwright)",
+      "steps": "(a) NFT-23 checked audit entries created by tests that run later; (b) E2E locators such as getByLabel('Category') also matched filter/search inputs; (c) a CSS selector used a React id containing ':'; (d) a Tab key press happened before the page rendered; (e) run_all_tests.sh stored the PID of a wrapper shell instead of the load-test server, so the server kept running and later exhausted PostgreSQL connections (HTTP 500 in the NFT runner).",
+      "expected": "Tests independent of order and with unambiguous selectors.",
+      "actual": "7 false failures in the first runs (1 pytest, 6 Playwright), 3 more while fixing selectors, and one aborted pipeline run (e) – none were application defects.",
+      "status": "Fixed",
+      "resolution": "NFT-23 now performs its own actions; E2E tests use name-based selectors and wait for rendering; the pipeline starts the server with 'exec' and waits for the port to close. All affected tests were re-run with the complete pipeline.",
+      "evidence": "test-results/run1-initial/"
+    },
+    {
+      "id": "DEF-08",
+      "title": "Status filter drop-down stretched across card headers",
+      "severity": "Low",
+      "type": "Application",
+      "module": "UI components (Visitors, Services, SOS, Gate desk)",
+      "found_by": "Manual visual review of screenshots (not detected by automated tests)",
+      "steps": "Log in as a warden and open Visitors.",
+      "expected": "Card title on the left, compact filter on the right.",
+      "actual": "The filter used the full-width input style, so it filled the header and wrapped the card title onto two lines.",
+      "status": "Fixed",
+      "resolution": "FilterSelect now has its own auto-width style. Frontend unit tests and the full Playwright suite were re-run afterwards.",
+      "evidence": "docs/screenshots/11-warden-visitor-approvals.png"
+    },
+    {
+      "id": "DEF-09",
+      "title": "Login fails with HTTP 500 when running on the built-in SQLite database",
+      "severity": "High",
+      "type": "Application",
+      "module": "Authentication / data layer",
+      "found_by": "User report – local run on Windows with SQLite (not covered: automated suites used PostgreSQL)",
+      "steps": "Start the app without DATABASE_URL (SQLite file), log in once, then log in again.",
+      "expected": "Login succeeds.",
+      "actual": "TypeError: can't compare offset-naive and offset-aware datetimes in auth.login – SQLite returns dates without a time zone.",
+      "status": "Fixed",
+      "resolution": "All date/time columns now use a UTCDateTime type that always returns time-zone-aware UTC values. Re-tested: backend suite 60/61 and browser suite 23/23 on SQLite (the remaining SQLite case is the PostgreSQL-only parallel-submit lock, NFT-21); 61/61 and 23/23 on PostgreSQL.",
+      "evidence": "backend/app/models.py (UTCDateTime)"
+    }
+  ]
+}

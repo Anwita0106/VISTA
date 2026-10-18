@@ -1,0 +1,1696 @@
+{
+  "config": {
+    "configFile": "/home/claude/VISTA/e2e/playwright.config.ts",
+    "rootDir": "/home/claude/VISTA/e2e/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/home/claude/VISTA/e2e/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../test-results/playwright-results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "../test-results/playwright-junit.xml"
+        }
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "../test-results/playwright-html",
+          "open": "never"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/claude/VISTA/test-results/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-desktop",
+        "name": "chromium-desktop",
+        "testDir": "/home/claude/VISTA/e2e/tests",
+        "testIgnore": [
+          "/mobile\\.spec/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/home/claude/VISTA/test-results/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-pixel5",
+        "name": "mobile-pixel5",
+        "testDir": "/home/claude/VISTA/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/home/claude/VISTA/test-results/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-iphone12-chromium",
+        "name": "mobile-iphone12-chromium",
+        "testDir": "/home/claude/VISTA/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec/"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.0",
+    "workers": 1,
+    "webServer": {
+      "command": "python3 -m uvicorn app.main:app --port 8001",
+      "cwd": "../backend",
+      "url": "http://localhost:8001/api/health",
+      "reuseExistingServer": false,
+      "timeout": 60000,
+      "env": {
+        "DATABASE_URL": "postgresql+psycopg://vista:vista_dev_pw@localhost:5432/vista_e2e",
+        "ESCALATION_CHECK_SECONDS": "0",
+        "UPLOAD_DIR": "../backend/.e2e-uploads",
+        "CORS_ORIGINS": "http://localhost:8001"
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "delivery.spec.ts",
+      "file": "delivery.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "FT-22/FT-23/FT-24 P2P delivery end to end with OTP handover",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "FT-22"
+                },
+                {
+                  "type": "case",
+                  "description": "FT-23"
+                },
+                {
+                  "type": "case",
+                  "description": "FT-24"
+                },
+                {
+                  "type": "actual",
+                  "description": "UI: DLV-00002 posted with ₹10 demo fee → accepted & picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3923,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:55:09.323Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-22"
+                    },
+                    {
+                      "type": "case",
+                      "description": "FT-23"
+                    },
+                    {
+                      "type": "case",
+                      "description": "FT-24"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: DLV-00002 posted with ₹10 demo fee → accepted & picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6be646c84a0e17f5bcd7-64665cf2c519a9efcf40",
+          "file": "delivery.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "functional.spec.ts",
+      "file": "functional.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authentication & access",
+          "file": "functional.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "FT-01 valid student login opens the student dashboard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-01"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: redirected to dashboard 'Good evening, Priya', role label 'Student', SOS button visible"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 572,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:55:13.578Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-01"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: redirected to dashboard 'Good evening, Priya', role label 'Student', SOS button visible"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-ea603e1c5ef988287ccc",
+              "file": "functional.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "FT-02 invalid password shows an error and stays on login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-02"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: error 'Invalid email or password' displayed; URL stays /login"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 485,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:55:14.181Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-02"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: error 'Invalid email or password' displayed; URL stays /login"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-5e47ad5cd64e4fb1184d",
+              "file": "functional.spec.ts",
+              "line": 14,
+              "column": 7
+            },
+            {
+              "title": "FT-03 navigation is role-specific",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-03"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: student menu shows Document Vault, no Users; warden menu shows Users/Hostels, no Vault; warden dashboard shows Active SOS card"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1070,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:55:14.687Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-03"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: student menu shows Document Vault, no Users; warden menu shows Users/Hostels, no Vault; warden dashboard shows Active SOS card"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-74b852257f3cf9e24379",
+              "file": "functional.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "FT-04 student opening an admin page gets access denied",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-04"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: /admin/users as student shows '403 Access denied' page"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 714,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:55:15.776Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-04"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: /admin/users as student shows '403 Access denied' page"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-f62b24c3d7a0dcf0f683",
+              "file": "functional.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "FT-06 registration form shows field validation errors",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-06"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 60703,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/home/claude/VISTA/e2e/tests/functional.spec.ts",
+                            "column": 56,
+                            "line": 53
+                          },
+                          "message": "Error: locator.fill: Test timeout of 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Password', { exact: true })\u001b[22m\n\n\n  51 |     await page.getByLabel(\"Registration number\").fill(\"abc\");\n  52 |     await page.getByLabel(\"Mobile number\").fill(\"123\");\n> 53 |     await page.getByLabel(\"Password\", { exact: true }).fill(\"short\");\n     |                                                        ^\n  54 |     await page.getByRole(\"button\", { name: \"Create account\" }).click();\n  55 |     await expect(page.getByText(\"Format: 24BCE1234\")).toBeVisible();\n  56 |     await expect(page.getByText(\"Enter a valid 10-digit mobile number\")).toBeVisible();\n    at /home/claude/VISTA/e2e/tests/functional.spec.ts:53:56"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:55:16.526Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-06"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Authentication--a82d9-ows-field-validation-errors-chromium-desktop/test-failed-3.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Authentication--a82d9-ows-field-validation-errors-chromium-desktop/test-failed-4.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Authentication--a82d9-ows-field-validation-errors-chromium-desktop/test-failed-6.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Authentication--a82d9-ows-field-validation-errors-chromium-desktop/test-failed-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Authentication--a82d9-ows-field-validation-errors-chromium-desktop/test-failed-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Authentication--a82d9-ows-field-validation-errors-chromium-desktop/test-failed-5.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Authentication--a82d9-ows-field-validation-errors-chromium-desktop/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Authentication--a82d9-ows-field-validation-errors-chromium-desktop/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-3bb20dceadc8096e1762",
+              "file": "functional.spec.ts",
+              "line": 47,
+              "column": 7
+            },
+            {
+              "title": "FT-41 logout ends the session",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-41"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: logout returns to /login; opening /complaints afterwards redirects to /login"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 846,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:56:18.804Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-41"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: logout returns to /login; opening /complaints afterwards redirects to /login"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-5ced9d44db8469560522",
+              "file": "functional.spec.ts",
+              "line": 62,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Profile & complaints",
+          "file": "functional.spec.ts",
+          "line": 73,
+          "column": 6,
+          "specs": [
+            {
+              "title": "FT-07 profile update persists after reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-07"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: 'Profile updated' toast; after reload mobile=9988776655, study=QUIET"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 995,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:56:19.754Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-07"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: 'Profile updated' toast; after reload mobile=9988776655, study=QUIET"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-185fbcc46c712116fe8f",
+              "file": "functional.spec.ts",
+              "line": 74,
+              "column": 7
+            },
+            {
+              "title": "FT-08/FT-32 complaint is created in the UI and persists after reload",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-08"
+                    },
+                    {
+                      "type": "case",
+                      "description": "FT-32"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 894,
+                      "error": {
+                        "message": "Error: locator.selectOption: Error: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r0:\" required=\"\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category*')\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n",
+                        "stack": "Error: locator.selectOption: Error: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r0:\" required=\"\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category*')\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n\n    at /home/claude/VISTA/e2e/tests/functional.spec.ts:94:39",
+                        "location": {
+                          "file": "/home/claude/VISTA/e2e/tests/functional.spec.ts",
+                          "column": 39,
+                          "line": 94
+                        },
+                        "snippet": "  92 |     await page.goto(\"/complaints\");\n  93 |     await page.getByRole(\"button\", { name: \"New complaint\" }).click();\n> 94 |     await page.getByLabel(\"Category\").selectOption(\"PLUMBING\");\n     |                                       ^\n  95 |     await page.getByLabel(\"Title\").fill(\"Bathroom tap leaking (E2E)\");\n  96 |     await page.getByLabel(\"Description\").fill(\"The tap in the attached bathroom drips all night.\");\n  97 |     await page.getByTestId(\"submit-complaint\").click();"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/claude/VISTA/e2e/tests/functional.spec.ts",
+                            "column": 39,
+                            "line": 94
+                          },
+                          "message": "Error: locator.selectOption: Error: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r0:\" required=\"\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category*')\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n\n\n  92 |     await page.goto(\"/complaints\");\n  93 |     await page.getByRole(\"button\", { name: \"New complaint\" }).click();\n> 94 |     await page.getByLabel(\"Category\").selectOption(\"PLUMBING\");\n     |                                       ^\n  95 |     await page.getByLabel(\"Title\").fill(\"Bathroom tap leaking (E2E)\");\n  96 |     await page.getByLabel(\"Description\").fill(\"The tap in the attached bathroom drips all night.\");\n  97 |     await page.getByTestId(\"submit-complaint\").click();\n    at /home/claude/VISTA/e2e/tests/functional.spec.ts:94:39"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:56:20.761Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-08"
+                        },
+                        {
+                          "type": "case",
+                          "description": "FT-32"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Profile-complai-2e8c7-I-and-persists-after-reload-chromium-desktop/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Profile-complai-2e8c7-I-and-persists-after-reload-chromium-desktop/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Profile-complai-2e8c7-I-and-persists-after-reload-chromium-desktop/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/claude/VISTA/e2e/tests/functional.spec.ts",
+                        "column": 39,
+                        "line": 94
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-4c297b03ba654247d503",
+              "file": "functional.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "FT-09 complaint form blocks missing required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-09"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: three inline errors shown (category, title, description); dialog stays open, nothing submitted"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 934,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:56:22.724Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-09"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: three inline errors shown (category, title, description); dialog stays open, nothing submitted"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-70c5bcbe7d16a52b7593",
+              "file": "functional.spec.ts",
+              "line": 110,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Visitors, notices and SOS",
+          "file": "functional.spec.ts",
+          "line": 122,
+          "column": 6,
+          "specs": [
+            {
+              "title": "FT-14/FT-15 student registers a visitor, warden approves, student sees approval",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-14"
+                    },
+                    {
+                      "type": "case",
+                      "description": "FT-15"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: request shown Pending to student → warden approved with remark → student list shows Approved + 'Please carry ID'"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2025,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:56:23.762Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-14"
+                        },
+                        {
+                          "type": "case",
+                          "description": "FT-15"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: request shown Pending to student → warden approved with remark → student list shows Approved + 'Please carry ID'"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-5416d84febecdf0f47a2",
+              "file": "functional.spec.ts",
+              "line": 123,
+              "column": 7
+            },
+            {
+              "title": "FT-17 past visit date is rejected in the form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-17"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: 'Visit date cannot be in the past' shown; no request created"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1018,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:56:25.814Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-17"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: 'Visit date cannot be in the past' shown; no request created"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-5f7d3333361a4616bdbd",
+              "file": "functional.spec.ts",
+              "line": 151,
+              "column": 7
+            },
+            {
+              "title": "FT-30 warden publishes a notice and students see it",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-30"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 964,
+                      "error": {
+                        "message": "Error: locator.selectOption: Error: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r2:\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category', { exact: true })\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n",
+                        "stack": "Error: locator.selectOption: Error: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r2:\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category', { exact: true })\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n\n    at /home/claude/VISTA/e2e/tests/functional.spec.ts:171:36",
+                        "location": {
+                          "file": "/home/claude/VISTA/e2e/tests/functional.spec.ts",
+                          "column": 36,
+                          "line": 171
+                        },
+                        "snippet": "  169 |     await w.getByLabel(\"Title\").fill(\"Pest control on Saturday (E2E)\");\n  170 |     await w.getByLabel(\"Message\").fill(\"Keep food items sealed. Rooms will be sprayed between 10 AM and 1 PM.\");\n> 171 |     await w.getByLabel(\"Category\").selectOption(\"MAINTENANCE\");\n      |                                    ^\n  172 |     await w.getByTestId(\"publish-notice\").click();\n  173 |     await expect(w.getByTestId(\"toast\")).toContainText(\"Notice published\");\n  174 |     const s = await newUserPage(browser, USERS.priya);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/claude/VISTA/e2e/tests/functional.spec.ts",
+                            "column": 36,
+                            "line": 171
+                          },
+                          "message": "Error: locator.selectOption: Error: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r2:\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category', { exact: true })\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n\n\n  169 |     await w.getByLabel(\"Title\").fill(\"Pest control on Saturday (E2E)\");\n  170 |     await w.getByLabel(\"Message\").fill(\"Keep food items sealed. Rooms will be sprayed between 10 AM and 1 PM.\");\n> 171 |     await w.getByLabel(\"Category\").selectOption(\"MAINTENANCE\");\n      |                                    ^\n  172 |     await w.getByTestId(\"publish-notice\").click();\n  173 |     await expect(w.getByTestId(\"toast\")).toContainText(\"Notice published\");\n  174 |     const s = await newUserPage(browser, USERS.priya);\n    at /home/claude/VISTA/e2e/tests/functional.spec.ts:171:36"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:56:26.854Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-30"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Visitors-notice-d5f5d--notice-and-students-see-it-chromium-desktop/test-failed-2.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Visitors-notice-d5f5d--notice-and-students-see-it-chromium-desktop/test-failed-1.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Visitors-notice-d5f5d--notice-and-students-see-it-chromium-desktop/test-failed-3.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Visitors-notice-d5f5d--notice-and-students-see-it-chromium-desktop/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/claude/VISTA/test-results/playwright-artifacts/functional-Visitors-notice-d5f5d--notice-and-students-see-it-chromium-desktop/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/claude/VISTA/e2e/tests/functional.spec.ts",
+                        "column": 36,
+                        "line": 171
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-720fb2122295daeb0623",
+              "file": "functional.spec.ts",
+              "line": 164,
+              "column": 7
+            },
+            {
+              "title": "FT-20 SOS requires confirmation, reaches the warden, is acknowledged and resolved",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-20"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: confirmation dialog with demo disclaimer → alert Raised on warden board → Acknowledged → Resolved; student sees Resolved"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2456,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-13T17:56:28.988Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-20"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: confirmation dialog with demo disclaimer → alert Raised on warden board → Acknowledged → Resolved; student sees Resolved"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-018930e07928348915b4",
+              "file": "functional.spec.ts",
+              "line": 182,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "nonfunctional.spec.ts",
+      "file": "nonfunctional.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "NFT-03 page load time of key pages is under 3 seconds",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-03"
+                },
+                {
+                  "type": "actual",
+                  "description": "Avg time until content visible (3 loads each, local server): / 197 ms, /complaints 151 ms, /notices 176 ms, /delivery 137 ms; worst 197 ms"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2499,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:56:31.619Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-03"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "Avg time until content visible (3 loads each, local server): / 197 ms, /complaints 151 ms, /notices 176 ms, /delivery 137 ms; worst 197 ms"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-771033b285d86baf96c9",
+          "file": "nonfunctional.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "NFT-10 stored XSS payloads are rendered as text, not executed",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-10"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 978,
+                  "error": {
+                    "message": "Error: locator.selectOption: Error: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r0:\" required=\"\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category*')\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n",
+                    "stack": "Error: locator.selectOption: Error: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r0:\" required=\"\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category*')\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n\n    at /home/claude/VISTA/e2e/tests/nonfunctional.spec.ts:34:34",
+                    "location": {
+                      "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                      "column": 34,
+                      "line": 34
+                    },
+                    "snippet": "  32 |   const payload = `<img src=x onerror=\"alert('xss')\"> Fan noise`;\n  33 |   await s.goto(\"/complaints?new=1\");\n> 34 |   await s.getByLabel(\"Category\").selectOption(\"ELECTRICAL\");\n     |                                  ^\n  35 |   await s.getByLabel(\"Title\").fill(payload);\n  36 |   await s.getByLabel(\"Description\").fill(`<script>alert(\"xss\")</script> description text`);\n  37 |   await s.getByTestId(\"submit-complaint\").click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                        "column": 34,
+                        "line": 34
+                      },
+                      "message": "Error: locator.selectOption: Error: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r0:\" required=\"\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category*')\n\nCall log:\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n\n\n  32 |   const payload = `<img src=x onerror=\"alert('xss')\"> Fan noise`;\n  33 |   await s.goto(\"/complaints?new=1\");\n> 34 |   await s.getByLabel(\"Category\").selectOption(\"ELECTRICAL\");\n     |                                  ^\n  35 |   await s.getByLabel(\"Title\").fill(payload);\n  36 |   await s.getByLabel(\"Description\").fill(`<script>alert(\"xss\")</script> description text`);\n  37 |   await s.getByTestId(\"submit-complaint\").click();\n    at /home/claude/VISTA/e2e/tests/nonfunctional.spec.ts:34:34"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:56:34.146Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-10"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-10-store-0d6e4-ndered-as-text-not-executed-chromium-desktop/test-failed-2.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-10-store-0d6e4-ndered-as-text-not-executed-chromium-desktop/test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-10-store-0d6e4-ndered-as-text-not-executed-chromium-desktop/test-failed-3.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-10-store-0d6e4-ndered-as-text-not-executed-chromium-desktop/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-10-store-0d6e4-ndered-as-text-not-executed-chromium-desktop/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                    "column": 34,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-752d7a1b1db2b52f7327",
+          "file": "nonfunctional.spec.ts",
+          "line": 24,
+          "column": 5
+        },
+        {
+          "title": "NFT-15 automated accessibility scan (axe-core, WCAG 2.1 A/AA)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-15"
+                },
+                {
+                  "type": "actual",
+                  "description": "7 pages scanned. /login: 0 serious/critical rule(s); /: 0 serious/critical rule(s); /complaints: 0 serious/critical rule(s); /visitors: 0 serious/critical rule(s); /delivery: 0 serious/critical rule(s); /sos: 0 serious/critical rule(s); /profile: 0 serious/critical rule(s). Total serious/critical nodes: 0"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9520,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:56:36.375Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-15"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "7 pages scanned. /login: 0 serious/critical rule(s); /: 0 serious/critical rule(s); /complaints: 0 serious/critical rule(s); /visitors: 0 serious/critical rule(s); /delivery: 0 serious/critical rule(s); /sos: 0 serious/critical rule(s); /profile: 0 serious/critical rule(s). Total serious/critical nodes: 0"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-f0666b5eccd6f285defd",
+          "file": "nonfunctional.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "NFT-16 keyboard-only navigation for login and complaint form",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-16"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1228,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Category')\nExpected: focused\nError: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r0:\" required=\"\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category*')\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Category')\nExpected: focused\nError: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r0:\" required=\"\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category*')\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n\n    at /home/claude/VISTA/e2e/tests/nonfunctional.spec.ts:96:45",
+                    "location": {
+                      "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                      "column": 45,
+                      "line": 96
+                    },
+                    "snippet": "  94 |   const dialog = page.getByRole(\"dialog\", { name: \"Raise a complaint\" });\n  95 |   await expect(dialog).toBeVisible();\n> 96 |   await expect(page.getByLabel(\"Category\")).toBeFocused();\n     |                                             ^\n  97 |   await page.keyboard.press(\"Escape\");\n  98 |   await expect(dialog).toBeHidden();\n  99 |   await page.goto(\"/\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                        "column": 45,
+                        "line": 96
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Category')\nExpected: focused\nError: strict mode violation: getByLabel('Category') resolved to 2 elements:\n    1) <select aria-label=\"Filter by category\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100 w-auto py-1.5\">…</select> aka getByLabel('Filter by category')\n    2) <select id=\":r0:\" required=\"\" name=\"category\" aria-invalid=\"false\" class=\"block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-200 disabled:bg-slate-100\">…</select> aka getByLabel('Category*')\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Category')\u001b[22m\n\n\n  94 |   const dialog = page.getByRole(\"dialog\", { name: \"Raise a complaint\" });\n  95 |   await expect(dialog).toBeVisible();\n> 96 |   await expect(page.getByLabel(\"Category\")).toBeFocused();\n     |                                             ^\n  97 |   await page.keyboard.press(\"Escape\");\n  98 |   await expect(dialog).toBeHidden();\n  99 |   await page.goto(\"/\");\n    at /home/claude/VISTA/e2e/tests/nonfunctional.spec.ts:96:45"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:56:46.009Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-16"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-16-keybo-21c70-or-login-and-complaint-form-chromium-desktop/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-16-keybo-21c70-or-login-and-complaint-form-chromium-desktop/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-16-keybo-21c70-or-login-and-complaint-form-chromium-desktop/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                    "column": 45,
+                    "line": 96
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-c5bbd466a2b81d5a65c5",
+          "file": "nonfunctional.spec.ts",
+          "line": 79,
+          "column": 5
+        },
+        {
+          "title": "NFT-17 form errors are announced and linked to their fields",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-17"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 463,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: #:r1:-error\nExpected: \u001b[32m\"Format: 24BCE1234\"\u001b[39m\nError: Unexpected token \"#\" while parsing css selector \"#:r1:-error\". Did you mean to CSS.escape it?\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for #:r1:-error\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: #:r1:-error\nExpected: \u001b[32m\"Format: 24BCE1234\"\u001b[39m\nError: Unexpected token \"#\" while parsing css selector \"#:r1:-error\". Did you mean to CSS.escape it?\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for #:r1:-error\u001b[22m\n\n    at /home/claude/VISTA/e2e/tests/nonfunctional.spec.ts:113:49",
+                    "location": {
+                      "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                      "column": 49,
+                      "line": 113
+                    },
+                    "snippet": "  111 |   await expect(reg).toHaveAttribute(\"aria-invalid\", \"true\");\n  112 |   const describedBy = await reg.getAttribute(\"aria-describedby\");\n> 113 |   await expect(page.locator(`#${describedBy}`)).toHaveText(\"Format: 24BCE1234\");\n      |                                                 ^\n  114 |   const alerts = await page.getByRole(\"alert\").count();\n  115 |   actual(`Empty registration submit: ${alerts} inline errors with role=alert; inputs marked aria-invalid and linked via aria-describedby`);\n  116 |   expect(alerts).toBeGreaterThanOrEqual(5);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                        "column": 49,
+                        "line": 113
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: #:r1:-error\nExpected: \u001b[32m\"Format: 24BCE1234\"\u001b[39m\nError: Unexpected token \"#\" while parsing css selector \"#:r1:-error\". Did you mean to CSS.escape it?\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for #:r1:-error\u001b[22m\n\n\n  111 |   await expect(reg).toHaveAttribute(\"aria-invalid\", \"true\");\n  112 |   const describedBy = await reg.getAttribute(\"aria-describedby\");\n> 113 |   await expect(page.locator(`#${describedBy}`)).toHaveText(\"Format: 24BCE1234\");\n      |                                                 ^\n  114 |   const alerts = await page.getByRole(\"alert\").count();\n  115 |   actual(`Empty registration submit: ${alerts} inline errors with role=alert; inputs marked aria-invalid and linked via aria-describedby`);\n  116 |   expect(alerts).toBeGreaterThanOrEqual(5);\n    at /home/claude/VISTA/e2e/tests/nonfunctional.spec.ts:113:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:56:48.282Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-17"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-17-form--7508e--and-linked-to-their-fields-chromium-desktop/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-17-form--7508e--and-linked-to-their-fields-chromium-desktop/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-17-form--7508e--and-linked-to-their-fields-chromium-desktop/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                    "column": 49,
+                    "line": 113
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-138c7d36f42ecdf9e4a7",
+          "file": "nonfunctional.spec.ts",
+          "line": 106,
+          "column": 5
+        },
+        {
+          "title": "NFT-18 responsive layout has no horizontal scrolling",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-18"
+                },
+                {
+                  "type": "actual",
+                  "description": "8 pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: /visitors@375px (503>375)"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 17672,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"/visitors@375px (503>375)\",\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"/visitors@375px (503>375)\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at /home/claude/VISTA/e2e/tests/nonfunctional.spec.ts:135:20",
+                    "location": {
+                      "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                      "column": 20,
+                      "line": 135
+                    },
+                    "snippet": "  133 |   }\n  134 |   actual(`${paths.length} pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: ${overflow.length ? overflow.join(\", \") : \"none\"}`);\n> 135 |   expect(overflow).toEqual([]);\n      |                    ^\n  136 | });\n  137 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                        "column": 20,
+                        "line": 135
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"/visitors@375px (503>375)\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  133 |   }\n  134 |   actual(`${paths.length} pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: ${overflow.length ? overflow.join(\", \") : \"none\"}`);\n> 135 |   expect(overflow).toEqual([]);\n      |                    ^\n  136 | });\n  137 |\n    at /home/claude/VISTA/e2e/tests/nonfunctional.spec.ts:135:20"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:56:49.792Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-18"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "8 pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: /visitors@375px (503>375)"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-18-respo-db0b3-has-no-horizontal-scrolling-chromium-desktop/test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-18-respo-db0b3-has-no-horizontal-scrolling-chromium-desktop/test-failed-2.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-18-respo-db0b3-has-no-horizontal-scrolling-chromium-desktop/test-failed-3.png"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/nonfunctional-NFT-18-respo-db0b3-has-no-horizontal-scrolling-chromium-desktop/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/claude/VISTA/e2e/tests/nonfunctional.spec.ts",
+                    "column": 20,
+                    "line": 135
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-2c0712443545ee1a44c7",
+          "file": "nonfunctional.spec.ts",
+          "line": 119,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "smoke.spec.ts",
+      "file": "smoke.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-26"
+                },
+                {
+                  "type": "actual",
+                  "description": "chromium-desktop: login, dashboard, complaints and deliveries pages rendered and worked"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1018,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:57:08.699Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-26"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "chromium-desktop: login, dashboard, complaints and deliveries pages rendered and worked"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4219922fea2e2bd3c691-c24d377bfe78b9788144",
+          "file": "smoke.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "mobile.spec.ts",
+      "file": "mobile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "NFT-29 mobile viewport: login, menu, SOS button and complaint form work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-29"
+                },
+                {
+                  "type": "actual",
+                  "description": "mobile-pixel5 (393x727, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "mobile-pixel5",
+              "projectName": "mobile-pixel5",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 958,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:57:10.662Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-29"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "mobile-pixel5 (393x727, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e79c838550b25e92508e-1e2abc45f7827d41568b",
+          "file": "mobile.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "NFT-29 mobile viewport: login, menu, SOS button and complaint form work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-29"
+                },
+                {
+                  "type": "actual",
+                  "description": "mobile-iphone12-chromium (390x664, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "mobile-iphone12-chromium",
+              "projectName": "mobile-iphone12-chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 948,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T17:57:12.515Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-29"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "mobile-iphone12-chromium (390x664, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e79c838550b25e92508e-95316cf6c7b7cee9e347",
+          "file": "mobile.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T17:55:04.553Z",
+    "duration": 129103.747,
+    "expected": 16,
+    "skipped": 0,
+    "unexpected": 7,
+    "flaky": 0
+  }
+}

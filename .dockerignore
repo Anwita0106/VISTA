@@ -1,0 +1,9 @@
+**/node_modules
+frontend/dist
+test-results
+reports
+**/__pycache__
+backend/uploads
+backend/.test-uploads
+backend/.e2e-uploads
+.env

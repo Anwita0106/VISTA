@@ -1,0 +1,14 @@
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+.env
+backend/uploads/
+backend/.test-uploads/
+backend/.e2e-uploads/
+backups/
+test-results/playwright-artifacts/
+.pytest_cache/
+.ruff_cache/
+*.db
+backend/.env

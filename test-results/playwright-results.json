@@ -1,0 +1,1550 @@
+{
+  "config": {
+    "configFile": "/home/claude/VISTA/e2e/playwright.config.ts",
+    "rootDir": "/home/claude/VISTA/e2e/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/home/claude/VISTA/e2e/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../test-results/playwright-results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "../test-results/playwright-junit.xml"
+        }
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "../test-results/playwright-html",
+          "open": "never"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/claude/VISTA/test-results/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-desktop",
+        "name": "chromium-desktop",
+        "testDir": "/home/claude/VISTA/e2e/tests",
+        "testIgnore": [
+          "/mobile\\.spec/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/home/claude/VISTA/test-results/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-pixel5",
+        "name": "mobile-pixel5",
+        "testDir": "/home/claude/VISTA/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/home/claude/VISTA/test-results/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-iphone12-chromium",
+        "name": "mobile-iphone12-chromium",
+        "testDir": "/home/claude/VISTA/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/home/claude/VISTA/test-results/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox-desktop",
+        "name": "firefox-desktop",
+        "testDir": "/home/claude/VISTA/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/smoke\\.spec/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/home/claude/VISTA/test-results/playwright-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit-desktop",
+        "name": "webkit-desktop",
+        "testDir": "/home/claude/VISTA/e2e/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/smoke\\.spec/"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.0",
+    "workers": 1,
+    "webServer": {
+      "command": "python3 -m uvicorn app.main:app --port 8001",
+      "cwd": "../backend",
+      "url": "http://localhost:8001/api/health",
+      "reuseExistingServer": false,
+      "timeout": 60000,
+      "env": {
+        "DATABASE_URL": "postgresql+psycopg://vista:vista_dev_pw@localhost:5432/vista_e2e",
+        "ESCALATION_CHECK_SECONDS": "0",
+        "UPLOAD_DIR": "../backend/.e2e-uploads",
+        "CORS_ORIGINS": "http://localhost:8001"
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "delivery.spec.ts",
+      "file": "delivery.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "FT-22/FT-23/FT-24 P2P delivery end to end with OTP handover",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "FT-22"
+                },
+                {
+                  "type": "case",
+                  "description": "FT-23"
+                },
+                {
+                  "type": "case",
+                  "description": "FT-24"
+                },
+                {
+                  "type": "actual",
+                  "description": "UI: DLV-00002 posted with ₹10 demo fee → accepted & picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3587,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:55:52.687Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-22"
+                    },
+                    {
+                      "type": "case",
+                      "description": "FT-23"
+                    },
+                    {
+                      "type": "case",
+                      "description": "FT-24"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: DLV-00002 posted with ₹10 demo fee → accepted & picked up by carrier → receiver saw 6-digit OTP and QR → wrong OTP showed '2 attempt(s) left' → correct OTP → Delivered (also on sender's view)"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6be646c84a0e17f5bcd7-64665cf2c519a9efcf40",
+          "file": "delivery.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "functional.spec.ts",
+      "file": "functional.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authentication & access",
+          "file": "functional.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "FT-01 valid student login opens the student dashboard",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-01"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: redirected to dashboard 'Good evening, Priya', role label 'Student', SOS button visible"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 704,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:55:56.382Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-01"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: redirected to dashboard 'Good evening, Priya', role label 'Student', SOS button visible"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-ea603e1c5ef988287ccc",
+              "file": "functional.spec.ts",
+              "line": 5,
+              "column": 7
+            },
+            {
+              "title": "FT-02 invalid password shows an error and stays on login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-02"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: error 'Invalid email or password' displayed; URL stays /login"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 664,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:55:57.119Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-02"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: error 'Invalid email or password' displayed; URL stays /login"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-5e47ad5cd64e4fb1184d",
+              "file": "functional.spec.ts",
+              "line": 14,
+              "column": 7
+            },
+            {
+              "title": "FT-03 navigation is role-specific",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-03"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: student menu shows Document Vault, no Users; warden menu shows Users/Hostels, no Vault; warden dashboard shows Active SOS card"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1221,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:55:57.804Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-03"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: student menu shows Document Vault, no Users; warden menu shows Users/Hostels, no Vault; warden dashboard shows Active SOS card"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-74b852257f3cf9e24379",
+              "file": "functional.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "FT-04 student opening an admin page gets access denied",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-04"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: /admin/users as student shows '403 Access denied' page"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 658,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:55:59.041Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-04"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: /admin/users as student shows '403 Access denied' page"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-f62b24c3d7a0dcf0f683",
+              "file": "functional.spec.ts",
+              "line": 39,
+              "column": 7
+            },
+            {
+              "title": "FT-06 registration form shows field validation errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-06"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: inline errors for reg. no., mobile, password and name; form not submitted"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 564,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:55:59.733Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-06"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: inline errors for reg. no., mobile, password and name; form not submitted"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-3bb20dceadc8096e1762",
+              "file": "functional.spec.ts",
+              "line": 47,
+              "column": 7
+            },
+            {
+              "title": "FT-41 logout ends the session",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-41"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: logout returns to /login; opening /complaints afterwards redirects to /login"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1008,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:56:00.330Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-41"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: logout returns to /login; opening /complaints afterwards redirects to /login"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-5ced9d44db8469560522",
+              "file": "functional.spec.ts",
+              "line": 62,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Profile & complaints",
+          "file": "functional.spec.ts",
+          "line": 73,
+          "column": 6,
+          "specs": [
+            {
+              "title": "FT-07 profile update persists after reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-07"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: 'Profile updated' toast; after reload mobile=9988776655, study=QUIET"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 988,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:56:01.371Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-07"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: 'Profile updated' toast; after reload mobile=9988776655, study=QUIET"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-185fbcc46c712116fe8f",
+              "file": "functional.spec.ts",
+              "line": 74,
+              "column": 7
+            },
+            {
+              "title": "FT-08/FT-32 complaint is created in the UI and persists after reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-08"
+                    },
+                    {
+                      "type": "case",
+                      "description": "FT-32"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: CMP-00008 created (status Open, forwarded to maintenance staff) and still listed after page reload"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1425,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:56:02.388Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-08"
+                        },
+                        {
+                          "type": "case",
+                          "description": "FT-32"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: CMP-00008 created (status Open, forwarded to maintenance staff) and still listed after page reload"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-4c297b03ba654247d503",
+              "file": "functional.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "FT-09 complaint form blocks missing required fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-09"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: three inline errors shown (category, title, description); dialog stays open, nothing submitted"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 830,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:56:03.851Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-09"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: three inline errors shown (category, title, description); dialog stays open, nothing submitted"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-70c5bcbe7d16a52b7593",
+              "file": "functional.spec.ts",
+              "line": 110,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Visitors, notices and SOS",
+          "file": "functional.spec.ts",
+          "line": 122,
+          "column": 6,
+          "specs": [
+            {
+              "title": "FT-14/FT-15 student registers a visitor, warden approves, student sees approval",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-14"
+                    },
+                    {
+                      "type": "case",
+                      "description": "FT-15"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: request shown Pending to student → warden approved with remark → student list shows Approved + 'Please carry ID'"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1980,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:56:04.703Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-14"
+                        },
+                        {
+                          "type": "case",
+                          "description": "FT-15"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: request shown Pending to student → warden approved with remark → student list shows Approved + 'Please carry ID'"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-5416d84febecdf0f47a2",
+              "file": "functional.spec.ts",
+              "line": 123,
+              "column": 7
+            },
+            {
+              "title": "FT-17 past visit date is rejected in the form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-17"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: 'Visit date cannot be in the past' shown; no request created"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 942,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:56:06.708Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-17"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: 'Visit date cannot be in the past' shown; no request created"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-5f7d3333361a4616bdbd",
+              "file": "functional.spec.ts",
+              "line": 151,
+              "column": 7
+            },
+            {
+              "title": "FT-30 warden publishes a notice and students see it",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-30"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: notice published by warden; visible on student's notice board and in student's notifications"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2350,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:56:07.685Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-30"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: notice published by warden; visible on student's notice board and in student's notifications"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-720fb2122295daeb0623",
+              "file": "functional.spec.ts",
+              "line": 164,
+              "column": 7
+            },
+            {
+              "title": "FT-20 SOS requires confirmation, reaches the warden, is acknowledged and resolved",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "FT-20"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "UI: confirmation dialog with demo disclaimer → alert Raised on warden board → Acknowledged → Resolved; student sees Resolved"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium-desktop",
+                  "projectName": "chromium-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2158,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-18T16:56:10.066Z",
+                      "annotations": [
+                        {
+                          "type": "case",
+                          "description": "FT-20"
+                        },
+                        {
+                          "type": "actual",
+                          "description": "UI: confirmation dialog with demo disclaimer → alert Raised on warden board → Acknowledged → Resolved; student sees Resolved"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "011e9001526c2e3d879a-018930e07928348915b4",
+              "file": "functional.spec.ts",
+              "line": 182,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "nonfunctional.spec.ts",
+      "file": "nonfunctional.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "NFT-03 page load time of key pages is under 3 seconds",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-03"
+                },
+                {
+                  "type": "actual",
+                  "description": "Avg time until content visible (3 loads each, local server): / 175 ms, /complaints 143 ms, /notices 133 ms, /delivery 146 ms; worst 175 ms"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2430,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:12.337Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-03"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "Avg time until content visible (3 loads each, local server): / 175 ms, /complaints 143 ms, /notices 133 ms, /delivery 146 ms; worst 175 ms"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-771033b285d86baf96c9",
+          "file": "nonfunctional.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "NFT-10 stored XSS payloads are rendered as text, not executed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-10"
+                },
+                {
+                  "type": "actual",
+                  "description": "Payloads shown literally to student and warden; JavaScript dialogs triggered: 0; injected <img> elements: 0; CSP header: present (script-src 'self')"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2088,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:14.855Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-10"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "Payloads shown literally to student and warden; JavaScript dialogs triggered: 0; injected <img> elements: 0; CSP header: present (script-src 'self')"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-752d7a1b1db2b52f7327",
+          "file": "nonfunctional.spec.ts",
+          "line": 24,
+          "column": 5
+        },
+        {
+          "title": "NFT-15 automated accessibility scan (axe-core, WCAG 2.1 A/AA)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-15"
+                },
+                {
+                  "type": "actual",
+                  "description": "7 pages scanned. /login: 0 serious/critical rule(s); /: 0 serious/critical rule(s); /complaints: 0 serious/critical rule(s); /visitors: 0 serious/critical rule(s); /delivery: 0 serious/critical rule(s); /sos: 0 serious/critical rule(s); /profile: 0 serious/critical rule(s). Total serious/critical nodes: 0"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9094,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:16.979Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-15"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "7 pages scanned. /login: 0 serious/critical rule(s); /: 0 serious/critical rule(s); /complaints: 0 serious/critical rule(s); /visitors: 0 serious/critical rule(s); /delivery: 0 serious/critical rule(s); /sos: 0 serious/critical rule(s); /profile: 0 serious/critical rule(s). Total serious/critical nodes: 0"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-f0666b5eccd6f285defd",
+          "file": "nonfunctional.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "NFT-16 keyboard-only navigation for login and complaint form",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-16"
+                },
+                {
+                  "type": "actual",
+                  "description": "Login completed with Tab/typing/Enter only; complaint dialog opened with Enter, focus moved into the form, Escape closed it; 'Skip to content' link is first in tab order"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1136,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:26.130Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-16"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "Login completed with Tab/typing/Enter only; complaint dialog opened with Enter, focus moved into the form, Escape closed it; 'Skip to content' link is first in tab order"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-c5bbd466a2b81d5a65c5",
+          "file": "nonfunctional.spec.ts",
+          "line": 79,
+          "column": 5
+        },
+        {
+          "title": "NFT-17 form errors are announced and linked to their fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-17"
+                },
+                {
+                  "type": "actual",
+                  "description": "Empty registration submit: 6 inline errors with role=alert; inputs marked aria-invalid and linked via aria-describedby"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 504,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:27.315Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-17"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "Empty registration submit: 6 inline errors with role=alert; inputs marked aria-invalid and linked via aria-describedby"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-138c7d36f42ecdf9e4a7",
+          "file": "nonfunctional.spec.ts",
+          "line": 107,
+          "column": 5
+        },
+        {
+          "title": "NFT-18 responsive layout has no horizontal scrolling",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-18"
+                },
+                {
+                  "type": "actual",
+                  "description": "8 pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: none"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17423,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:27.887Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-18"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "8 pages x 3 widths (375, 768, 1366 px) checked; pages with horizontal overflow: none"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "807ee9107ca85d8c2bb3-2c0712443545ee1a44c7",
+          "file": "nonfunctional.spec.ts",
+          "line": 120,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "smoke.spec.ts",
+      "file": "smoke.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-26"
+                },
+                {
+                  "type": "actual",
+                  "description": "chromium-desktop: login, dashboard, complaints and deliveries pages rendered and worked"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1003,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:45.362Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-26"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "chromium-desktop: login, dashboard, complaints and deliveries pages rendered and worked"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4219922fea2e2bd3c691-c24d377bfe78b9788144",
+          "file": "smoke.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox-desktop",
+              "projectName": "firefox-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3,
+                  "error": {
+                    "message": "Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
+                    "stack": "Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                  },
+                  "errors": [
+                    {
+                      "message": "Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/firefox-1495/firefox/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:51.041Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/smoke-NFT-26-27-28-cross-b-a45ea-n-dashboard-complaints-list-firefox-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4219922fea2e2bd3c691-7a968caecfc025e28517",
+          "file": "smoke.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "NFT-26/27/28 cross-browser smoke: login, dashboard, complaints list",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit-desktop",
+              "projectName": "webkit-desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4,
+                  "error": {
+                    "message": "Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/webkit-2215/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝",
+                    "stack": "Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/webkit-2215/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                  },
+                  "errors": [
+                    {
+                      "message": "Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/webkit-2215/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:51.808Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/claude/VISTA/test-results/playwright-artifacts/smoke-NFT-26-27-28-cross-b-a45ea-n-dashboard-complaints-list-webkit-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4219922fea2e2bd3c691-5eb05df794c449399b59",
+          "file": "smoke.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "mobile.spec.ts",
+      "file": "mobile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "NFT-29 mobile viewport: login, menu, SOS button and complaint form work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-29"
+                },
+                {
+                  "type": "actual",
+                  "description": "mobile-pixel5 (393x727, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "mobile-pixel5",
+              "projectName": "mobile-pixel5",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1020,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:47.323Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-29"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "mobile-pixel5 (393x727, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e79c838550b25e92508e-1e2abc45f7827d41568b",
+          "file": "mobile.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "NFT-29 mobile viewport: login, menu, SOS button and complaint form work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "case",
+                  "description": "NFT-29"
+                },
+                {
+                  "type": "actual",
+                  "description": "mobile-iphone12-chromium (390x664, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "mobile-iphone12-chromium",
+              "projectName": "mobile-iphone12-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1097,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T16:56:49.176Z",
+                  "annotations": [
+                    {
+                      "type": "case",
+                      "description": "NFT-29"
+                    },
+                    {
+                      "type": "actual",
+                      "description": "mobile-iphone12-chromium (390x664, touch): login, hamburger menu, SOS button and complaint dialog work; no horizontal overflow"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e79c838550b25e92508e-95316cf6c7b7cee9e347",
+          "file": "mobile.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T16:55:49.369Z",
+    "duration": 62536.661,
+    "expected": 23,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

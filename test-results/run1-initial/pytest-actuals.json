@@ -1,0 +1,158 @@
+{
+  "FT-01": [
+    "HTTP 200; JWT issued; role=STUDENT; room=G-101"
+  ],
+  "FT-02": [
+    "HTTP 401 'Invalid email or password' for wrong password and for unknown email (same message)"
+  ],
+  "FT-03": [
+    "Student dashboard cards=['active_deliveries', 'active_services', 'open_complaints', 'pending_visitors']; warden dashboard has 8 management cards incl. active_sos"
+  ],
+  "FT-04": [
+    "Student received 403 Forbidden on POST /api/admin/users, GET /api/admin/audit-logs, PATCH /api/visitors/1/decision, POST /api/notices"
+  ],
+  "FT-05": [
+    "201 Created (role STUDENT); duplicate reg no -> 409 'An account with this registration number already exists'; new account can log in"
+  ],
+  "FT-06": [
+    "reg_no='ABC123' -> 422 'reg_no: Registration number must look like 24BYB0193'",
+    "phone='12345' -> 422 'phone: Phone must be a valid 10-digit Indian mobile number'",
+    "password='short' -> 422 'password: Password must be at least 8 characters and contain letters a'",
+    "email='not-an-email' -> 422 'email: value is not a valid email address: An email address must have '",
+    "full_name='<script>' -> 422 'full_name: Name may contain only letters, spaces, dots, hyphens and ap'"
+  ],
+  "FT-07": [
+    "Profile saved and re-read: phone=9000011111, pref_sleep=LATE; invalid phone -> 422"
+  ],
+  "FT-31": [
+    "403 for: warden deactivates user; warden creates hostel; security approves visitor; maintenance views audit log"
+  ],
+  "FT-41": [
+    "Logout 200; reusing the same token -> 401 'Session has been logged out'"
+  ],
+  "FT-30": [
+    "Warden published URGENT notice to Ladies Hostel East; shown to Priya, hidden from Men's hostel student; 15 students notified; empty notice -> 422"
+  ],
+  "FT-33": [
+    "Lost item reported (201) and found by keyword search; future date -> 422; only reporter can close (others 403)"
+  ],
+  "FT-34": [
+    "Listing 201; negative price -> 422; non-seller mark sold -> 403; sold item hidden from listings; price sort ascending verified"
+  ],
+  "FT-35": [
+    "Note with PDF shared and readable by classmates; vault file downloadable by owner, other student -> 404; .exe -> 415; >2 MB -> 413"
+  ],
+  "FT-36": [
+    "Feedback 201; same meal twice -> 409; rating 7 -> 422; mess staff summary shows BREAKFAST avg 3.0"
+  ],
+  "FT-37": [
+    "9 same-gender matches ranked by preference score (top Sneha Das 3/3); 46 rooms with free beds listed"
+  ],
+  "FT-38": [
+    "Female student -> boys' hostel 400; -> G-104 200; full room -> 409; student allocating -> 403; duplicate room number -> 409"
+  ],
+  "FT-39": [
+    "Report complaint total 7 = DB count; students 57 = DB count; CSV export has 7 rows + header; warden -> 403"
+  ],
+  "FT-40": [
+    "Student -> warden message delivered (unread=1), shown in thread, marked read on open (unread=0); empty message -> 422"
+  ],
+  "FT-08": [
+    "201; CMP-00008 OPEN, priority MEDIUM; auto-forwarded to Ramesh Electricals (MAINTENANCE) and notified"
+  ],
+  "FT-09": [
+    "Empty title/description -> 422 'title: String should have at least 5 characters'; missing category -> 422; invalid category -> 422"
+  ],
+  "FT-10": [
+    "WASHROOM requested LOW -> stored HIGH; WATER requested MEDIUM -> stored HIGH"
+  ],
+  "FT-11": [
+    "OPEN -> IN_PROGRESS -> RESOLVED by assigned staff, CLOSED by student; history has 4 entries; student notified"
+  ],
+  "FT-12": [
+    "Staff CLOSE -> 403; student RESOLVE -> 403; other student view -> 404; CLOSED -> IN_PROGRESS -> 409 'Invalid status change from CLOSED to IN_PROGRESS'"
+  ],
+  "FT-13": [
+    "HIGH complaint aged 25 h escalated to Dr. Lakshmi Narayanan; 0-h LOW complaint not escalated; chief warden notified"
+  ],
+  "FT-22": [
+    "201 DLV-00002 OPEN, fee \u20b910, demo receipt RCPT-DEMO-000002, Men's Hostel North -> Ladies Hostel East; same-hostel receiver -> 400; fee not confirmed -> 400; unknown receiver -> 404"
+  ],
+  "FT-23": [
+    "Listed as available; sender/receiver accept -> 400; Vikram accepts -> ACCEPTED; second carrier -> 409 'This delivery has already been taken by another carrier'"
+  ],
+  "FT-24": [
+    "OTP visible only to receiver (hidden from carrier); carrier entered it -> 200 DELIVERED; OTP cleared after use"
+  ],
+  "FT-25": [
+    "Wrong OTP -> 400 'Incorrect OTP. 2 attempt(s) left.'; non-numeric -> 422; sender entering OTP -> 403; status stays PICKED_UP"
+  ],
+  "FT-26": [
+    "3 wrong OTPs -> 400, 400, 423 (locked); correct OTP after lock -> 410; expired OTP -> 410 'OTP has expired or is not active. Ask for a new OTP.'; OTP re-issue capped at 3 (4th -> 409)"
+  ],
+  "FT-27": [
+    "Non-carrier verify/pickup -> 403; cancel after ACCEPTED -> 409 'Invalid delivery state change from ACCEPTED to CANCELLED'; fail before pickup -> 409"
+  ],
+  "FT-28": [
+    "Wrong room -> 400 'Verification failed: room number did not match'; forged QR -> 400; fake image -> 415; correct QR + photo + details -> DELIVERED with photo stored"
+  ],
+  "FT-29": [
+    "Missing courier name -> 422; GATE-00001 BOOKED with courier 'Ravi Kumar'; collect before arrival -> 409; security marks AT_GATE; wrong OTP -> 400; maintenance staff -> 403; correct OTP -> COLLECTED"
+  ],
+  "NFT-07": [
+    "0 protected endpoint/method pairs called without a token: all returned 401"
+  ],
+  "NFT-08": [
+    "16 cross-role operations (student, staff, warden, admin) all denied with 403 by the backend"
+  ],
+  "NFT-09": [
+    "5 injection payloads x 4 inputs (20 requests): login always 401, searches 200 with no extra rows, 0 server errors, users table intact"
+  ],
+  "NFT-11": [
+    "Tampered, expired, wrong-key and alg=none tokens all 401; tokens expire after 120 min; logout revocation covered in FT-41"
+  ],
+  "NFT-12": [
+    "No password/OTP hashes in any API response; 66 passwords bcrypt-hashed; 7 OTPs stored as bcrypt hashes; OTP/QR secret shown only to the receiver (FT-24)"
+  ],
+  "NFT-13": [
+    "5 wrong passwords -> 401 each; 6th attempt -> 429; correct password while locked -> 429 'Too many failed attempts. Try again in 15 minutes.'"
+  ],
+  "NFT-14": [
+    "Uploads rejected: exe as octet-stream -> 415; html renamed pdf -> 415; empty file -> 422; svg image -> 415; size limit 2 MB -> 413 (FT-35)"
+  ],
+  "NFT-20": [
+    "missing record -> 404; malformed JSON -> 422; bad query type -> 422; unknown route -> 404; wrong method -> 405; JSON error bodies, no stack traces; /api/health reports DB status"
+  ],
+  "NFT-21": [
+    "5 parallel identical complaint submissions -> codes [201, 201, 201, 201, 201], 5 stored; 4 parallel carrier accepts -> codes [200, 409, 409, 409], carrier recorded once"
+  ],
+  "FT-14": [
+    "201 PENDING; 3 warden notifications; duplicate same visitor/date -> 409"
+  ],
+  "FT-15": [
+    "Warden approval -> 200 APPROVED; student sees APPROVED and gets notification; deciding again -> 409"
+  ],
+  "FT-16": [
+    "Reject without reason -> 422 'Please give a reason when rejecting a visitor request'; with reason -> REJECTED, remark shown to student"
+  ],
+  "FT-17": [
+    "past date -> 422 'Visit date cannot be in the past'",
+    "more than 30 days ahead -> 422 'Visits can be requested at most 30 days in advance'",
+    "malformed date -> 422 'Visit date must be a valid date (YYYY-MM-DD)'",
+    "end before start -> 422 'Visit end time must be after the start time'",
+    "outside visiting hours -> 422 'Visiting hours are 08:00 to 20:00'",
+    "missing phone -> 422 'visitor_phone: Phone must be a valid 10-digit Indian mobile '"
+  ],
+  "FT-18": [
+    "Sick meal 201 PENDING -> in mess queue -> ACCEPTED -> COMPLETED by mess staff; cleaning staff -> 403"
+  ],
+  "FT-19": [
+    "Cleaning 201 PENDING visible to cleaning staff; duplicate -> 409; missing slot -> 422; date > 7 days -> 422"
+  ],
+  "FT-20": [
+    "SOS RAISED, 4 responders (warden, chief, security) notified in 2.8 ms (API round trip 19 ms); resolve-before-ack -> 409; ACKNOWLEDGED -> RESOLVED with timestamps"
+  ],
+  "FT-21": [
+    "Unconfirmed SOS -> 400 'SOS must be confirmed before it is sent', no alert stored; maintenance staff cannot acknowledge (403)"
+  ]
+}

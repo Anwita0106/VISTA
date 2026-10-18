@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  @apply bg-vista-bg font-sans text-vista-ink antialiased;
+}
+:focus-visible {
+  outline-color: #E9A23B;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+}

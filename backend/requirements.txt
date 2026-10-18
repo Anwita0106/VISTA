@@ -1,0 +1,15 @@
+fastapi==0.143.0
+uvicorn[standard]==0.53.0
+SQLAlchemy==2.1.4
+psycopg[binary]==3.3.6
+pydantic[email]==2.13.5
+PyJWT==2.14.0
+bcrypt==5.0.0
+python-multipart==0.0.32
+# testing
+pytest==9.1.1
+httpx==0.28.1
+pytest-json-report==1.5.0
+# reporting
+reportlab==5.0.1
+openpyxl==3.1.5

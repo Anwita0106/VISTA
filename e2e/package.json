@@ -1,0 +1,13 @@
+{
+  "name": "vista-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test": "playwright test",
+    "test:all-browsers": "ALL_BROWSERS=1 playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.56.0"
+  }
+}

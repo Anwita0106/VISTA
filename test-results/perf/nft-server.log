@@ -1,0 +1,54 @@
+INFO:     Started server process [14281]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8003 (Press CTRL+C to quit)
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [14281]
+INFO:     Uvicorn running on http://127.0.0.1:8003 (Press CTRL+C to quit)
+INFO:     Started parent process [14287]
+INFO:     Started server process [14290]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Started server process [14289]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+unknown PostgreSQL timezone: 'ASIA0'; will use UTC
+unknown PostgreSQL timezone: 'ASIA0'; will use UTC
+INFO:     Received SIGTERM, exiting.
+INFO:     Terminated child process [14289]
+INFO:     Terminated child process [14290]
+INFO:     Waiting for child process [14289]
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [14290]
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [14289]
+INFO:     Waiting for child process [14290]
+INFO:     Stopping parent process [14287]
+INFO:     Uvicorn running on http://127.0.0.1:8003 (Press CTRL+C to quit)
+INFO:     Started parent process [14514]
+INFO:     Started server process [14516]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Started server process [14517]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+unknown PostgreSQL timezone: 'ASIA0'; will use UTC
+unknown PostgreSQL timezone: 'ASIA0'; will use UTC
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [14516]
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [14517]
+INFO:     Received SIGTERM, exiting.
+INFO:     Waiting for child process [14516]
+INFO:     Waiting for child process [14517]
+INFO:     Stopping parent process [14514]

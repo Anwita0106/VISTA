@@ -1,0 +1,554 @@
+{
+  "tool": "pytest",
+  "results": [
+    {
+      "nodeid": "tests/test_auth.py::test_ft01_valid_login",
+      "cases": [
+        "FT-01"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.094,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft02_invalid_login",
+      "cases": [
+        "FT-02"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.08,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft03_role_based_dashboard",
+      "cases": [
+        "FT-03"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.312,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft04_student_blocked_from_admin",
+      "cases": [
+        "FT-04"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.017,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft05_student_registration",
+      "cases": [
+        "FT-05"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.164,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft06_registration_validation[reg_no-ABC123]",
+      "cases": [
+        "FT-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.003,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft06_registration_validation[phone-12345]",
+      "cases": [
+        "FT-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.002,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft06_registration_validation[password-short]",
+      "cases": [
+        "FT-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.002,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft06_registration_validation[email-not-an-email]",
+      "cases": [
+        "FT-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.002,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft06_registration_validation[full_name-<script>]",
+      "cases": [
+        "FT-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.002,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft07_profile_update_persists",
+      "cases": [
+        "FT-07"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.107,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft31_unauthorized_admin_actions",
+      "cases": [
+        "FT-31"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.165,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_auth.py::test_ft41_logout_revokes_token",
+      "cases": [
+        "FT-41"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.167,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft30_notice_publish_and_display",
+      "cases": [
+        "FT-30"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.276,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft33_lost_and_found",
+      "cases": [
+        "FT-33"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.116,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft34_marketplace",
+      "cases": [
+        "FT-34"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.125,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft35_notes_and_vault",
+      "cases": [
+        "FT-35"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.07,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft36_mess_feedback",
+      "cases": [
+        "FT-36"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.195,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft37_roommate_finder",
+      "cases": [
+        "FT-37"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.083,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft38_room_allocation_rules",
+      "cases": [
+        "FT-38"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.154,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft39_reports_match_database",
+      "cases": [
+        "FT-39"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.086,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft40_in_app_messaging",
+      "cases": [
+        "FT-40"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.04,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft42_admin_registers_staff_warden_admin",
+      "cases": [
+        "FT-42"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.497,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_community_admin.py::test_ft43_hostel_map_and_structure",
+      "cases": [
+        "FT-43"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.066,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_complaints.py::test_ft08_register_complaint_forwarded",
+      "cases": [
+        "FT-08"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.027,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_complaints.py::test_ft09_complaint_missing_fields",
+      "cases": [
+        "FT-09"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.014,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_complaints.py::test_ft10_washroom_water_high_priority",
+      "cases": [
+        "FT-10"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.033,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_complaints.py::test_ft11_staff_updates_status",
+      "cases": [
+        "FT-11"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.051,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_complaints.py::test_ft12_invalid_complaint_transitions",
+      "cases": [
+        "FT-12"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.057,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_complaints.py::test_ft13_escalation_rule",
+      "cases": [
+        "FT-13"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.13,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_delivery.py::test_ft22_create_delivery_request",
+      "cases": [
+        "FT-22"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.038,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_delivery.py::test_ft23_carrier_acceptance",
+      "cases": [
+        "FT-23"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.058,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_delivery.py::test_ft24_valid_otp_completes_delivery",
+      "cases": [
+        "FT-24"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.095,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_delivery.py::test_ft25_invalid_otp",
+      "cases": [
+        "FT-25"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.082,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_delivery.py::test_ft26_otp_lockout_and_expiry",
+      "cases": [
+        "FT-26"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.232,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_delivery.py::test_ft27_invalid_delivery_transitions",
+      "cases": [
+        "FT-27"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.053,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_delivery.py::test_ft28_qr_photo_verification",
+      "cases": [
+        "FT-28"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.111,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_delivery.py::test_ft29_gate_parcel_reservation",
+      "cases": [
+        "FT-29"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.074,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft07_authentication_enforced",
+      "cases": [
+        "NFT-07"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft08_role_permission_matrix",
+      "cases": [
+        "NFT-08"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.067,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft09_sql_injection",
+      "cases": [
+        "NFT-09"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.122,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft11_token_handling",
+      "cases": [
+        "NFT-11"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.088,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft12_sensitive_data_protection",
+      "cases": [
+        "NFT-12"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.217,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft13_brute_force_lockout",
+      "cases": [
+        "NFT-13"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.383,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft14_upload_validation",
+      "cases": [
+        "NFT-14"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.018,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft20_error_handling",
+      "cases": [
+        "NFT-20"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.014,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft21_duplicate_and_race_conditions",
+      "cases": [
+        "NFT-21"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.086,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_nonfunctional_security.py::test_nft23_audit_and_status_consistency",
+      "cases": [
+        "NFT-23"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.082,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft14_visitor_registration",
+      "cases": [
+        "FT-14"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.019,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft15_warden_approves",
+      "cases": [
+        "FT-15"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.032,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft16_warden_rejects",
+      "cases": [
+        "FT-16"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.098,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[past date-data0-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[more than 30 days ahead-data1-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[malformed date-data2-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[end before start-data3-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[outside visiting hours-data4-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft17_invalid_visitor_dates[missing phone-data5-422]",
+      "cases": [
+        "FT-17"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft18_sick_meal_request",
+      "cases": [
+        "FT-18"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.153,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft19_room_cleaning_request",
+      "cases": [
+        "FT-19"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.036,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft20_sos_raise_ack_resolve",
+      "cases": [
+        "FT-20"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.054,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_visitors_services_sos.py::test_ft21_sos_requires_confirmation_and_role",
+      "cases": [
+        "FT-21"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.015,
+      "message": ""
+    }
+  ]
+}
